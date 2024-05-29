@@ -2,6 +2,7 @@ package com.example.demo.persistence.entities;
 
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
@@ -14,19 +15,16 @@ public class SocialEvent {
     private Long id;
     private String name;
     private Long invitedGuest;
-    //TODO CHECK HOW TO SAVE ADDRESS
     private String address;
     private Date programatedDate;
     private String contactInfo;
 
     @Column(length = 2500)
     private String details;
-    private BigInteger price;
-    private String tags; //TODO HABIA QUE AGREGARLO???
+    private BigDecimal price;
     private boolean published;
     private Long maxGuests;
-
-
+    private Long confirmedGuests;
     @ManyToMany
     @JoinTable(
             name = "event_category_relation",
