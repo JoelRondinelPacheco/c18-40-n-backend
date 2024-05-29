@@ -13,8 +13,14 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class HttpSecurityConfig {
 
+
+    private final AuthenticationProvider daoAuthenticationProvider;
+
     @Autowired
-    private AuthenticationProvider daoAuthenticationProvider;
+    public HttpSecurityConfig(AuthenticationProvider daoAuthenticationProvider) {
+        this.daoAuthenticationProvider = daoAuthenticationProvider;
+    }
+
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
