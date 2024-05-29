@@ -26,4 +26,9 @@ public class PersonController {
 
         return ResponseEntity.ok(persons);
     }
+
+    @GetMapping("/id/{test}")
+    public ResponseEntity<String> testEndpoint(@PathVariable String test) {
+        return ResponseEntity.ok(test);
+    }
 }
