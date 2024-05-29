@@ -16,7 +16,7 @@ public class SocialEvent {
     private String name;
     private Long invitedGuest;
     private String address;
-    private Date programatedDate;
+    private Date programmedDate;
     private String contactInfo;
 
     @Column(length = 2500)
