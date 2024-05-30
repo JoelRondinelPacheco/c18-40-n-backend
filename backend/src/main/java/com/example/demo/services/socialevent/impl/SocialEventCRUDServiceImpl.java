@@ -1,5 +1,6 @@
 package com.example.demo.services.socialevent.impl;
 
+import com.example.demo.exceptions.EntityNotFoundException;
 import com.example.demo.persistence.entities.Category;
 import com.example.demo.persistence.entities.Person;
 import com.example.demo.persistence.entities.SocialEvent;
@@ -17,6 +18,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class SocialEventCRUDServiceImpl implements SocialEventCRUDService {
@@ -45,6 +47,23 @@ public class SocialEventCRUDServiceImpl implements SocialEventCRUDService {
 
     @Override
     public SocialEventInfoDTO update(SocialEventInfoDTO update) {
+
+        List<Category> categories = this.categoryRepository.findAllById(
+                update.getCategories().stream()
+                        .map(c -> c.getId())
+                        .collect(Collectors.toList())
+        );
+
+        SocialEvent socialEvent = this.getById(update.getId());
+        socialEvent.setName(update.getName());
+        socialEvent.setAddress(update.getAddress());
+        socialEvent.setProgrammedDate(update.getProgramatedDate());
+        socialEvent.setContactInfo(update.getContactInfo());
+        socialEvent.setDetails(update.getDetails());
+        socialEvent.setPrice(update.getPrice());
+        socialEvent.setPublished(update.isPublished());
+        socialEvent.setMaxGuests(update.getMaxGuests());
+        socialEvent.setCategories(categories);
         return null;
     }
 
@@ -54,8 +73,20 @@ public class SocialEventCRUDServiceImpl implements SocialEventCRUDService {
     }
 
     @Override
-    public void delete(Long eventId) {
+    public SocialEventInfoDTO getDTOById(Long id) {
+        SocialEvent socialEvent = this.getById(id);
+        return this.mapper.entityToDTO(socialEvent);
+    }
 
+    @Override
+    public SocialEvent getById(Long id) {
+        return this.socialEventRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("El evento solicitado no existe."));
+    }
+
+    @Override
+    public void delete(Long eventId) {
+        //this.socialEventRepository.deleteById(eventId);
+        // TODO SOLO DESACTIVAR
     }
 
     private SocialEvent socialEventFromDTO(CreateSocialEventDTO dto) {

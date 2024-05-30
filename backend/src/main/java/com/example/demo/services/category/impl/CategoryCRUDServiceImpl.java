@@ -65,7 +65,7 @@ public class CategoryCRUDServiceImpl implements CategoryCRUDService {
 
     @Override
     public void delete(Long categoryId) {
-        // TODO VER QUE HACER ON DELETE
+        // TODO IMPLEMENTAR SOLO DESACTIVARLA
     }
 
     private Category categoryFromDTO (CreateCategoryDTO dto) {

@@ -12,6 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @Data
 public class SocialEventInfoDTO extends SocialEventBaseDTO {
+    private Long id;
     private Long confirmedGuests;
     private List<CategoryInfoDTO> categories;
     private PersonInfoDTO organizer;
