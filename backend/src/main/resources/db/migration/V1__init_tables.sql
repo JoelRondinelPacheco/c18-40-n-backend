@@ -1,4 +1,4 @@
-create table category (id bigserial not null, name varchar(50), primary key (id));
+create table category (id bigserial not null, name varchar(50) unique, primary key (id));
 create table event_category_relation (category_id bigint not null, event_id bigint not null);
 create table person (id bigserial not null, phone_number bigint, role_id bigint, address varchar(255), email varchar(255) unique, lastname varchar(255), name varchar(255), password varchar(255), username varchar(255), primary key (id));
 create table person_event_relation (event_id bigint not null, person_id bigint not null);

@@ -1,8 +1,14 @@
 package com.example.demo.persistence.entities;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Qualification {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
