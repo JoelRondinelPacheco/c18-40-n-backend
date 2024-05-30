@@ -1,5 +1,6 @@
 package com.example.demo.persistence.entities;
 
+import com.example.demo.persistence.utils.RoleEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,9 +25,8 @@ public class Person {
     private String email;
     private String password;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "role_id")
-    private Role role;
+    @Enumerated(EnumType.STRING)
+    private RoleEnum role;
 
     @OneToMany(mappedBy = "organizer", fetch = FetchType.LAZY)
     private List<SocialEvent> events;
