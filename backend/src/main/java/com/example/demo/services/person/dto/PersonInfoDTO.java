@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class PersonInfoDTO {
+public class PersonInfoDTO extends PersonBaseDTO {
     private Long id;
 }
