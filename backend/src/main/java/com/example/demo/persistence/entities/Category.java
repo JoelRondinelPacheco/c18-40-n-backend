@@ -16,7 +16,7 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 50)
+    @Column(length = 50, unique = true)
     private String name;
 
     @ManyToMany(mappedBy = "categories", fetch = FetchType.LAZY)

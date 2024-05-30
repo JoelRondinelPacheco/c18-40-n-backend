@@ -1,11 +1,14 @@
 package com.example.demo.services.category.impl;
 
+import com.example.demo.exceptions.EntityAlreadyExistsException;
+import com.example.demo.exceptions.EntityNotFoundException;
 import com.example.demo.persistence.entities.Category;
 import com.example.demo.persistence.repository.CategoryRepository;
 import com.example.demo.services.DtoMapper;
 import com.example.demo.services.category.CategoryCRUDService;
 import com.example.demo.services.category.dto.CategoryInfoDTO;
 import com.example.demo.services.category.dto.CreateCategoryDTO;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
@@ -29,22 +32,30 @@ public class CategoryCRUDServiceImpl implements CategoryCRUDService {
 
     @Override
     public CategoryInfoDTO create(CreateCategoryDTO categoryInfo) {
-        Category category = new Category();
-        category.setName(category.getName());
+        try {
+            Category category = this.categoryFromDTO(categoryInfo);
 
-        Category categorySaved = this.categoryRepository.save(category);
+            Category categorySaved = this.categoryRepository.save(category);
 
-        return this.mapper.entityToDTO(categorySaved);
+            return this.mapper.entityToDTO(categorySaved);
+        } catch (ConstraintViolationException e) {
+            throw new EntityAlreadyExistsException("La categoría con el nombre " + categoryInfo.getName() + " ya existe.");
+        }
     }
 
     @Override
     public CategoryInfoDTO update(CategoryInfoDTO categoryInfo) {
-        Category category = this.categoryRepository.findById(categoryInfo.getId()).orElseThrow();
-        category.setName(category.getName());
+        Category category = this.categoryRepository.findById(categoryInfo.getId()).orElseThrow(() -> new EntityNotFoundException("La categoría: " + categoryInfo.getName() + " no existe."));
+        Category returnCategory = null;
 
-        Category categoryUpdated = this.categoryRepository.save(category);
+        if (categoryInfo.getName().equals(category.getName())) {
+            returnCategory = category;
+        } else {
+            category.setName(category.getName());
+            returnCategory = this.categoryRepository.save(category);
+        }
 
-        return this.mapper.entityToDTO(categoryUpdated);
+        return this.mapper.entityToDTO(returnCategory);
     }
 
     @Override
@@ -55,5 +66,11 @@ public class CategoryCRUDServiceImpl implements CategoryCRUDService {
     @Override
     public void delete(Long categoryId) {
         // TODO VER QUE HACER ON DELETE
+    }
+
+    private Category categoryFromDTO (CreateCategoryDTO dto) {
+        Category category = new Category();
+        category.setName(dto.getName());
+        return category;
     }
 }
