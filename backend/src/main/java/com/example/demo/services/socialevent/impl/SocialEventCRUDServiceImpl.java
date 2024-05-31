@@ -64,7 +64,10 @@ public class SocialEventCRUDServiceImpl implements SocialEventCRUDService {
         socialEvent.setPublished(update.isPublished());
         socialEvent.setMaxGuests(update.getMaxGuests());
         socialEvent.setCategories(categories);
-        return null;
+        // TODO CAMBIAR ORGANIZADOR?
+
+        SocialEvent savedSocialEvent = this.socialEventRepository.save(socialEvent);
+        return this.mapper.entityToDTO(savedSocialEvent);
     }
 
     @Override

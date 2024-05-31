@@ -12,7 +12,16 @@ public class PersonMapper implements DtoMapper<PersonInfoDTO, Person> {
 
     @Override
     public PersonInfoDTO entityToDTO(Person person) {
-        return null;
+
+        PersonInfoDTO personInfoDTO = new PersonInfoDTO();
+        personInfoDTO.setId(person.getId());
+        personInfoDTO.setName(person.getName());
+        personInfoDTO.setLastName(personInfoDTO.getLastName());
+        personInfoDTO.setUserName(person.getUsername());
+        personInfoDTO.setPhoneNumber(person.getPhoneNumber());
+        personInfoDTO.setEmail(person.getEmail());
+
+        return personInfoDTO;
     }
 
     @Override
