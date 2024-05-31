@@ -1,6 +1,7 @@
+create type role_enum as enum ('USER', 'ADMIN');
 create table category (id bigserial not null, name varchar(50) unique, primary key (id));
 create table event_category_relation (category_id bigint not null, event_id bigint not null);
-create table person (id bigserial not null, phone_number bigint, role enum('USER', 'ADMIN'), address varchar(255), email varchar(255) unique, lastname varchar(255), name varchar(255), password varchar(255), username varchar(255), primary key (id));
+create table person (id bigserial not null, phone_number bigint, role role_enum, address varchar(255), email varchar(255) unique not null, lastname varchar(255), name varchar(255), password varchar(255), username varchar(255), primary key (id));
 create table person_event_relation (event_id bigint not null, person_id bigint not null);
 create table qualification (event_id bigint, id bigserial not null, quantity bigint, observations varchar(255), primary key (id));
 create table social_event (price numeric(38,2), published boolean not null, id bigserial not null, invited_guest bigint, max_guests bigint, organizer_id bigint, confirmed_guests bigint, programmed_date timestamp(6), details varchar(2500), address varchar(255), contact_info varchar(255), name varchar(255), primary key (id));

@@ -11,11 +11,17 @@ import org.springframework.stereotype.Service;
 public class CategoryMapper implements DtoMapper<CategoryInfoDTO, Category> {
     @Override
     public CategoryInfoDTO entityToDTO(Category category) {
-        return null;
+        CategoryInfoDTO categoryInfoDTO = new CategoryInfoDTO();
+        categoryInfoDTO.setId(category.getId());
+        categoryInfoDTO.setName(category.getName());
+        return categoryInfoDTO;
     }
 
     @Override
     public Category dtoToEntity(CategoryInfoDTO categoryInfoDTO) {
-        return null;
+        Category category = new Category();
+        category.setId(categoryInfoDTO.getId());
+        category.setName(categoryInfoDTO.getName());
+        return category;
     }
 }
