@@ -10,4 +10,6 @@ import lombok.NoArgsConstructor;
 @Data
 public class PersonInfoDTO {
     private Long id;
+    private String name;
+    private String email;
 }

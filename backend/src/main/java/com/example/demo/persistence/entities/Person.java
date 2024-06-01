@@ -1,10 +1,14 @@
 package com.example.demo.persistence.entities;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
 @Entity(name = "person")
+@Getter
+@Setter
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
