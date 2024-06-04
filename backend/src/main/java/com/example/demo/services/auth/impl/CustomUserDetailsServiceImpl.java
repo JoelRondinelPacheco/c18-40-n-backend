@@ -1,10 +1,8 @@
-package com.example.demo.services.person.impl;
+package com.example.demo.services.auth.impl;
 
-import com.example.demo.persistence.entities.Person;
-import com.example.demo.persistence.entities.PersonCredentials;
+import com.example.demo.persistence.entities.UserCredentials;
 import com.example.demo.persistence.repository.UserCredentialsRepository;
-import com.example.demo.persistence.repository.UserRepository;
-import com.example.demo.services.person.CustomUserDetailsService;
+import com.example.demo.services.auth.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -22,7 +20,7 @@ public class CustomUserDetailsServiceImpl implements CustomUserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        PersonCredentials user = this.userCredentialRepository.findByPerson_Email(username).orElseThrow(() -> new UsernameNotFoundException("Credenciales invalidas"));
+        UserCredentials user = this.userCredentialRepository.findByPerson_Email(username).orElseThrow(() -> new UsernameNotFoundException("Credenciales invalidas"));
         return user;
     }
 }

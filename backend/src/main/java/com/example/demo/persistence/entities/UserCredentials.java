@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 @Entity
 @Data
-public class PersonCredentials implements UserDetails {
+public class UserCredentials implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
