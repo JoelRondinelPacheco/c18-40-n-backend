@@ -1,0 +1,19 @@
+.container-banner{
+    position: relative;
+    width: 100%;
+    height: 60vh; /* Ocupa toda la altura de la ventana */
+    overflow: hidden; /* Oculta cualquier parte de la imagen que se desborde */
+    margin: auto;
+    /* margin-top: 30px; */
+    /* border-radius: 30px; */
+}
+
+.image-banner{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%; /* La imagen ocupa todo el ancho del contenedor */
+    height: 50%; /* Establece la altura de la imagen al 50% del contenedor */
+    min-height: 60vh; /* Asegura que la altura de la imagen sea al menos el 50% de la altura de la ventana */
+    object-fit: cover; /* La imagen se ajusta para cubrir todo el contenedor */
+}
