@@ -1,4 +1,3 @@
-import React from "react";
 import "./AboutUs.css";
 
 const AboutUs = () => {
@@ -7,19 +6,19 @@ const AboutUs = () => {
       id: 1,
       name: "Maria Martinez",
       role: "UX/UI",
-      image: "/public/ejemplo2.png",
+      image: "/ejemplo2.png",
     },
     {
       id: 2,
       name: "Ana Fernandez",
       role: "QA Tester - Scrum master",
-      image: "/public/ejemplo3.png",
+      image: "/ejemplo3.png",
     },
     {
       id: 3,
       name: "Robin Perez",
       role: "FrontEnd",
-      image: "/public/ejemplo1.png",
+      image: "/ejemplo1.png",
     },
   ];
 
