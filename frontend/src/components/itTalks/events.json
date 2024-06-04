@@ -1,0 +1,29 @@
+[
+    {
+    "id": "1",
+    "title": "Danza clásica",
+    "image": "/test.jpg",
+    "description": "Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500...",
+    "location": "Calle 45 # 50 - 30 - Bogotá - centro comercial unicentro piso 4",
+    "date": "Sábado 15/06",
+    "time": "20.30 hs"
+    },
+    {
+    "id": "2",
+    "title": "Danza clásica",
+    "image": "/test.jpg",
+    "description": "Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500...,Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500...Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500...Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500...Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500...Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500...",
+    "location": "Teatro San Martín",
+    "date": "Domingo 16/06",
+    "time": "18.00 hs"
+    },
+    {
+    "id": "3",
+    "title": "Danza contemporánea",
+    "image": "/test.jpg",
+    "description": "Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500...",
+    "location": "Espacio Zero",
+    "date": "Lunes 17/06",
+    "time": "19.00 hs"
+    }
+]

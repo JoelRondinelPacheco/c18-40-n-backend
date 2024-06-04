@@ -1,0 +1,47 @@
+.footer {
+    background-color: #252827;
+    color: #fff;
+    padding: 20px 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  .footer-content {
+    display: flex;
+    justify-content: space-around;
+    width: 90%;
+    margin: 0 auto;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #444;
+  }
+  
+  .footer-section {
+    flex: 1;
+  }
+  
+  .footer-logo {
+    width: 100px; /* Ajusta el tamaño del logo según sea necesario */
+  }
+  
+  .footer-section h4 {
+    margin-bottom: 10px;
+  }
+  
+  .footer-section ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .footer-section ul li {
+    margin-bottom: 5px;
+  }
+  
+  .footer-bottom {
+    text-align: center;
+    padding-top: 10px;
+  }
+  
+  .footer-bottom p {
+    margin: 5px 0;
+    font-size: 0.9rem;
+  }
+  
