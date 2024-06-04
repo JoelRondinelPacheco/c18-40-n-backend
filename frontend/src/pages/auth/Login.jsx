@@ -1,14 +1,17 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./Auth.css";
-import logo from "/Users/user/Desktop/c18-40-n-java-react/frontend/src/assets/logoMultiMeet.png";
+import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -26,7 +29,7 @@ const Login = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // logica de validacion
+    // Logica de validacion
     let validationError = {};
 
     if (!username) {
@@ -38,28 +41,34 @@ const Login = () => {
     if (!password) {
       validationError.password = "Por favor ingrese una Contraseña Valida.";
     } else if (password.length < 8) {
-      validationError.password =
-        "La contraseña debe tener al menos 8 caracteres.";
+      validationError.password = "La contraseña debe tener al menos 8 caracteres.";
     }
 
-    setErrors(validationError); //actualiza el estado de los errores
+    setErrors(validationError); // Actualiza el estado de los errores
     // Si no hay errores de validación, maneja el envío del formulario (por ejemplo, llamada a la API)
     if (Object.keys(validationError).length === 0) {
-      // Implementa la lógica de inicio de sesión aquí (por ejemplo, llamada a la API)
-      console.log("Inicio de sesión exitoso, ¡Bienvenido!:", username, password); // para la prueba
+      // Simulación de la lógica de login
+      const token = 'your-auth-token';
+      const user = { name: 'John', role: 'organizer' }; // o 'user'
 
+      localStorage.setItem('authToken', token);
+      localStorage.setItem('user', JSON.stringify(user));
+
+      toast.success('Inicio de sesión exitoso', { autoClose: 1000 });
+      navigate('/');
+      
+      // Limpia los campos de usuario y contraseña después del inicio de sesión
       setUsername("");
       setPassword("");
     }
   };
 
   const toggleShowPassword = () => {
-    setShowPassword((prevState) => !prevState); // invierte el estado actual
+    setShowPassword((prevState) => !prevState); // Invierte el estado actual
   };
 
   return (
     <section className="userAuth">
-      <img src={logo} alt="Logo de Multi Meet" />
       <h1>Iniciar Sesión</h1>
       <form className="form" onSubmit={handleSubmit}>
         <label className="label" htmlFor="usuario">
@@ -95,11 +104,11 @@ const Login = () => {
           />
         </div>
 
-
         <button className="button" type="submit">
           Ingresar
         </button>
       </form>
+      <Link to="/">Regresar al Home</Link>
     </section>
   );
 };

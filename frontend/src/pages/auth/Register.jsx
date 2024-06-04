@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./Auth.css";
-import logo from "/Users/user/Desktop/c18-40-n-java-react/frontend/src/assets/logoMultiMeet.png";
+import { Link } from "react-router-dom";
+// import logo from "/Users/user/Desktop/c18-40-n-java-react/frontend/src/assets/logoMultiMeet.png";
 
 const Register = () => {
   const [username, setUsername] = useState("");
@@ -85,7 +86,7 @@ const Register = () => {
 
   return (
     <section className="userAuth">
-      <img src={logo} alt="Logo de Multi Meet" />
+      {/* <img src={logo} alt="Logo de Multi Meet" /> */}
       <h1>Iniciar Registro</h1>
       <form className="form" onSubmit={handleSubmit}>
 
@@ -149,6 +150,7 @@ const Register = () => {
           Registrarse
         </button>
       </form>
+      <Link to="/">Regresar al Home</Link>
     </section>
   );
 };
