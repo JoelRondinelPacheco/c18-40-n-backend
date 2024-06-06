@@ -1,6 +1,7 @@
 package com.example.demo.services.auth.impl;
 
 import com.example.demo.services.auth.JwtTokenService;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
@@ -10,17 +11,22 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import java.security.Key;
+import javax.crypto.SecretKey;
+import java.security.KeyFactory;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.X509EncodedKeySpec;
 import java.util.Date;
 import java.util.Map;
 
 @Service
 public class JwtTokenServiceImpl implements JwtTokenService {
 
-    @Value("${security.jwt.expiration-in-minutes.auth}")
+    @Value("${security.jwt.auth.expiration-in-minutes}")
     private Long AUTH_EXPIRATION_IN_MINUTES;
 
-    private final String SECRET_KEY="CAMBIAR A STRING EN APPLICATION PROPERTIES";
+    @Value("${security.jwt.secret-key}")
+    private String SECRET_KEY;
 
     @Override
     public String generateAuthToken(String username, Map<String, Object> extraClaims) {
@@ -53,11 +59,20 @@ public class JwtTokenServiceImpl implements JwtTokenService {
 
     @Override
     public String extractUsername(String jwt) {
-        return null;
+        return this.extractAllClaims(jwt).getSubject();
     }
 
-    private Key getSecretKey() {
-        byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
+    @Override
+    public Claims extractAllClaims(String jwt) {
+        return Jwts.parser()
+                .verifyWith(this.getSecretKey())
+                .build()
+                .parseSignedClaims(jwt)
+                .getPayload();
+    }
+
+    private SecretKey getSecretKey() {
+        byte[] keyBytes = SECRET_KEY.getBytes();
         return Keys.hmacShaKeyFor(keyBytes);
     }
 

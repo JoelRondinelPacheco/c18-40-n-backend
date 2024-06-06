@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 
@@ -44,8 +43,8 @@ public class SocialEvent {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "organizer_id")
-    private Person organizer;
+    private User organizer;
 
     @ManyToMany(mappedBy = "attendedEvents")
-    private List<Person> guests;
+    private List<User> guests;
 }

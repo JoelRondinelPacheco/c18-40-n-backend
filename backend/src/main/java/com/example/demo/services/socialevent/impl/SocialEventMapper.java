@@ -1,11 +1,11 @@
 package com.example.demo.services.socialevent.impl;
 
 import com.example.demo.persistence.entities.Category;
-import com.example.demo.persistence.entities.Person;
+import com.example.demo.persistence.entities.User;
 import com.example.demo.persistence.entities.SocialEvent;
 import com.example.demo.services.DtoMapper;
 import com.example.demo.services.category.dto.CategoryInfoDTO;
-import com.example.demo.services.person.dto.PersonInfoDTO;
+import com.example.demo.services.user.dto.UserInfoDTO;
 import com.example.demo.services.socialevent.dto.SocialEventInfoDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -18,12 +18,12 @@ import java.util.stream.Collectors;
 public class SocialEventMapper implements DtoMapper<SocialEventInfoDTO, SocialEvent> {
 
     @Qualifier("personMapper")
-    private final DtoMapper<PersonInfoDTO, Person> personMapper;
+    private final DtoMapper<UserInfoDTO, User> personMapper;
     @Qualifier("categoryMapper")
     private final DtoMapper<CategoryInfoDTO, Category> categoryMapper;
 
     @Autowired
-    public SocialEventMapper(DtoMapper<PersonInfoDTO, Person> personMapper, DtoMapper<CategoryInfoDTO, Category> categoryMapper) {
+    public SocialEventMapper(DtoMapper<UserInfoDTO, User> personMapper, DtoMapper<CategoryInfoDTO, Category> categoryMapper) {
         this.personMapper = personMapper;
         this.categoryMapper = categoryMapper;
     }

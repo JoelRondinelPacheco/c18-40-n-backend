@@ -1,6 +1,5 @@
 package com.example.demo.persistence.entities;
 
-import com.example.demo.persistence.utils.RoleEnum;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
@@ -19,23 +18,23 @@ public class UserCredentials implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true, nullable = false)
     @OneToOne
-    @JoinColumn(name = "person_email", referencedColumnName = "email")
-    private Person person;
+    @JoinColumn(name = "user_email", referencedColumnName = "email")
+    private User user;
     private String password;
     private boolean accountNonExpired;
     private boolean accountNonLocked;
     private boolean credentialsNonExpired;
     private boolean enabled;
-    @Enumerated(EnumType.STRING)
-    private RoleEnum role;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "role_id", referencedColumnName = "id")
+    private Role role;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = this.role.getPermissions().stream()
-                .map(permissions -> new SimpleGrantedAuthority(permissions.name()))
+                .map(permission -> new SimpleGrantedAuthority(permission.getName()))
                 .collect(Collectors.toList());
-        authorities.add(new SimpleGrantedAuthority("ROLE_" + this.role.name()));
+        authorities.add(new SimpleGrantedAuthority("ROLE_" + this.role.getName()));
         return authorities;
     }
 
@@ -46,7 +45,7 @@ public class UserCredentials implements UserDetails {
 
     @Override
     public String getUsername() {
-        return this.person.getEmail();
+        return this.user.getEmail();
     }
 
     @Override

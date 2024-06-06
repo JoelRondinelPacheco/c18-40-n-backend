@@ -1,23 +1,18 @@
 package com.example.demo.persistence.entities;
 
-import com.example.demo.persistence.utils.RoleEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 
-@Entity(name = "person")
+@Entity(name = "user_data")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Person {
+//todo cambiar a user
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -34,8 +29,8 @@ public class Person {
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
-            name = "person_event_relation",
-            joinColumns = @JoinColumn(name = "person_id"),
+            name = "user_data_event_relation",
+            joinColumns = @JoinColumn(name = "user_data_id"),
             inverseJoinColumns = @JoinColumn(name = "event_id")
     )
     private List<SocialEvent> attendedEvents;

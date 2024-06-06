@@ -20,7 +20,6 @@ public class CustomUserDetailsServiceImpl implements CustomUserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserCredentials user = this.userCredentialRepository.findByPerson_Email(username).orElseThrow(() -> new UsernameNotFoundException("Credenciales invalidas"));
-        return user;
+        return this.userCredentialRepository.findByUser_Email(username).orElseThrow(() -> new UsernameNotFoundException("Credenciales invalidas"));
     }
 }
