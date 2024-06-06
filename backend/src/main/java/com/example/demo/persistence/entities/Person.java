@@ -1,14 +1,17 @@
 package com.example.demo.persistence.entities;
 
+import com.example.demo.persistence.utils.RoleEnum;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import java.util.List;
 
+
 @Entity(name = "person")
-@Getter
-@Setter
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,22 +21,18 @@ public class Person {
     private String username;
     private String address;
     private Long phoneNumber;
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String email;
-    private String password;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "role_id")
-    private Role role;
 
     @OneToMany(mappedBy = "organizer", fetch = FetchType.LAZY)
     private List<SocialEvent> events;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "person_event_relation",
             joinColumns = @JoinColumn(name = "person_id"),
             inverseJoinColumns = @JoinColumn(name = "event_id")
     )
     private List<SocialEvent> attendedEvents;
+
 }
