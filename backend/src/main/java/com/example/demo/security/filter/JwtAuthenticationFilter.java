@@ -39,7 +39,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
 
         String username = this.jwtTokenService.extractUsername(jwt);
-        System.out.println(username);
+
         UserCredentials userCredentials = (UserCredentials) this.userDetailsService.loadUserByUsername(username);
 
         UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(username, null, userCredentials.getAuthorities());
@@ -49,7 +49,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         SecurityContextHolder.getContext().setAuthentication(authToken);
 
         filterChain.doFilter(request, response);
-
 
     }
 }

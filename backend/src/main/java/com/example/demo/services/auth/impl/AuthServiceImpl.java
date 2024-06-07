@@ -53,6 +53,8 @@ public class AuthServiceImpl implements AuthService {
     public LoginResponse login(LoginRequest body) {
         Authentication authentication = new UsernamePasswordAuthenticationToken(body.email(), body.password());
 
+        this.authenticationManager.authenticate(authentication);
+
         UserCredentials userCredentials = (UserCredentials) this.userDetailsService.loadUserByUsername(body.email());
 
         String jwt = this.jwtTokenService.generateAuthToken(
@@ -60,7 +62,7 @@ public class AuthServiceImpl implements AuthService {
                 this.generateExtraClaims(userCredentials)
                 );
 
-        return new LoginResponse(jwt);
+        return new LoginResponse(jwt, userCredentials.getRole().getName(), userCredentials.getUsername());
     }
 
     @Override
