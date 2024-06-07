@@ -21,6 +21,7 @@ public class Person {
     private String username;
     private String address;
     private Long phoneNumber;
+
     @Column(unique = true, nullable = false)
     private String email;
 
@@ -34,5 +35,5 @@ public class Person {
             inverseJoinColumns = @JoinColumn(name = "event_id")
     )
     private List<SocialEvent> attendedEvents;
-
+62
 }
