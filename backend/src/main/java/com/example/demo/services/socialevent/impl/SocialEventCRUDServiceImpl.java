@@ -9,6 +9,7 @@ import com.example.demo.persistence.repository.SocialEventRepository;
 import com.example.demo.persistence.repository.UserRepository;
 import com.example.demo.services.DtoMapper;
 import com.example.demo.services.socialevent.SocialEventCRUDService;
+import com.example.demo.services.socialevent.SocialEventService;
 import com.example.demo.services.socialevent.dto.CreateSocialEventDTO;
 import com.example.demo.services.socialevent.dto.SocialEventInfoDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,14 +31,15 @@ public class SocialEventCRUDServiceImpl implements SocialEventCRUDService {
     private final CategoryRepository categoryRepository;
     private final SocialEventRepository socialEventRepository;
     private final UserRepository userRepository;
+    private final SocialEventService socialEventService;
 
     @Autowired
-    public SocialEventCRUDServiceImpl(DtoMapper<SocialEventInfoDTO, SocialEvent> mapper, CategoryRepository categoryRepository, SocialEventRepository socialEventRepository, UserRepository userRepository) {
+    public SocialEventCRUDServiceImpl(DtoMapper<SocialEventInfoDTO, SocialEvent> mapper, CategoryRepository categoryRepository, SocialEventRepository socialEventRepository, UserRepository userRepository, SocialEventService socialEventService) {
         this.mapper = mapper;
         this.categoryRepository = categoryRepository;
         this.socialEventRepository = socialEventRepository;
         this.userRepository = userRepository;
-
+        this.socialEventService = socialEventService;
     }
 
     @Override
@@ -72,9 +75,25 @@ public class SocialEventCRUDServiceImpl implements SocialEventCRUDService {
 
     @Override
     public Page<SocialEventInfoDTO> getPage(Pageable pageable) {
-        //SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        // todo agregar si el usario asiste a cada evento
-        return this.socialEventRepository.findAll(pageable).map(this.mapper::entityToDTO);
+        Object p = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        return this.socialEventRepository.findAll(pageable).map(e -> this.socialEventInfo(e, (String) p));
+
+    }
+
+    private SocialEventInfoDTO socialEventInfo(SocialEvent socialEvent, String email) {
+        boolean userAssists = false;
+        //false por defecto si es anonymousUser
+        if (!email.equals("anonymousUser")) {
+            userAssists  = this.userRepository.isUserAttendingEvent(email, socialEvent.getId());
+        }
+
+        BigDecimal eventTotalQualification = this.socialEventService.getQualification(socialEvent.getId()).qualification();
+        SocialEventInfoDTO s = this.mapper.entityToDTO(socialEvent);
+        s.setTotalQualification(eventTotalQualification);
+        s.setUserAssists(userAssists);
+
+        return s;
     }
 
     @Override
