@@ -25,7 +25,7 @@ const AboutUs = () => {
   return (
       
       <section className="main-content">
-        <h1 className="about-us">Sobre MultiMeet</h1>
+        <h1 className="about-us">Somos MultiMeet</h1>
         <div className="info">
         <h2>¿Qué es MultiMeet?</h2>
         <p className="info-description">

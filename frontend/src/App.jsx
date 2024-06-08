@@ -10,11 +10,17 @@ import EventComponent from './pages/EventComponent/EventComponent';
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
 import AboutUs from './pages/about/AboutUs';
+import ScrollToTop from './components/scrollToTop/ScrollToTop';
+import UserProfile from './pages/userProfile/UserProfile';
+import Blog from './pages/Blog/Blog';
 
 function App() {
 
   return (
+    
+
     <BrowserRouter>
+      <ScrollToTop/>
         <Routes>
             <Route path='login' element={<Login />} />
             <Route path='register' element={<Register />} />
@@ -33,6 +39,8 @@ const LayoutWrapper = () => {
         <Route path='event/:id' element={<EventDetails />} />
         <Route path='create-event' element={<EventComponent />} />
         <Route path='about-us' element={<AboutUs />} />
+        <Route path='user-profile' element={<UserProfile/>}/>
+        <Route path='blog' element={<Blog/>}/>
         <Route path='*' element={<NotFound404 />} />
       </Routes>
     </Layout>

@@ -1,20 +1,30 @@
-import { Link } from 'react-router-dom'
-import './Footer.css'
+import { Link } from "react-router-dom";
+import "./Footer.css";
 
 const Footer = () => {
   return (
     <footer className="footer">
       <div className="footer-content">
         <div className="footer-section">
-          <img src='./logoWhiteOrange.png' alt="Multimeet Logo" className="footer-logo" />
+          <Link to="/">
+            <img
+              src="./logoWhiteOrange.png"
+              alt="Multimeet Logo"
+              className="footer-logo"
+            />
+          </Link>
         </div>
         <div className="footer-section">
           {/* <h4>MULTIMEET</h4> */}
           <ul>
             {/* <li>Inicio</li> */}
-            <li><Link to='/about-us'>Quiénes Somos</Link></li>
+            <li>
+              <Link to="/about-us">Quiénes Somos</Link>
+            </li>
             {/* <li>Calendario</li> */}
-            <li><Link to='/blog'>Blog</Link></li>
+            <li>
+              <Link to="/blog">Blog</Link>
+            </li>
           </ul>
         </div>
         {/* <div className="footer-section">
@@ -43,7 +53,7 @@ const Footer = () => {
         </p>
       </div>
     </footer>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;

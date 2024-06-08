@@ -55,7 +55,11 @@ const Header = () => {
             {userRole === 'organizer' && (
               <Link to='/create-event'>
                 <div className="create-event">Crear Evento</div>
+                <div>
+                  <Link to ="/user-profile">Mi perfil</Link>
+                </div>
               </Link>
+              
             )}
           </>
         ) : (
