@@ -62,7 +62,7 @@ public class AuthServiceImpl implements AuthService {
                 this.generateExtraClaims(userCredentials)
                 );
 
-        return new LoginResponse(jwt, userCredentials.getRole().getName(), userCredentials.getUsername());
+        return new LoginResponse(jwt, userCredentials.getRole().getName(), this.getLoginUsername(userCredentials.getUser()));
     }
 
     @Override
@@ -100,5 +100,16 @@ public class AuthServiceImpl implements AuthService {
 
     private boolean validatePassword(String password, String repeatedPassword) {
         return password.equals(repeatedPassword);
+    }
+
+    private String getLoginUsername(User user) {
+
+        if (!user.getName().isBlank()) {
+            return user.getName().concat(
+                    user.getLastname()
+            );
+        }
+
+        return user.getUsername();
     }
 }
