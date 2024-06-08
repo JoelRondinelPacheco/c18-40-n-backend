@@ -6,7 +6,8 @@ import com.example.demo.persistence.repository.SocialEventRepository;
 import com.example.demo.persistence.repository.UserRepository;
 import com.example.demo.services.socialevent.SocialEventCRUDService;
 import com.example.demo.services.socialevent.ToggleAssistEventUseCase;
-import com.example.demo.services.socialevent.dto.UserEventAssistInfo;
+import com.example.demo.services.socialevent.dto.UserEventAssistRequest;
+import com.example.demo.services.socialevent.dto.UserEventAssistResponse;
 import com.example.demo.services.user.UserCRUDService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,25 +29,39 @@ public class ToggleAssistEventUseCaseImpl implements ToggleAssistEventUseCase {
     }
 
     @Override
-    public UserEventAssistInfo assists(UserEventAssistInfo body) {
+    public UserEventAssistResponse assists(UserEventAssistRequest body, String email) {
 
-        boolean userAssists = this.userRepository.isUserAttendingEvent(body.email(), body.eventId());
+        boolean userAssists = this.userRepository.isUserAttendingEvent(email, body.getEventId());
 
-        if (userAssists == body.assist()) {
-            return body;
+        UserEventAssistResponse response = UserEventAssistResponse.builder()
+                .eventId(body.getEventId())
+                .assist(body.isAssist())
+                .build();
+
+        if (userAssists == body.isAssist()) {
+            response.setInfo(this.equalAssistParameter(body.isAssist()));
+            return response;
         }
 
-        User user = this.userCRUDService.getUserByEmail(body.email());
-        SocialEvent event = this.socialEventCRUDService.getById(body.eventId());
+        User user = this.userCRUDService.getUserByEmail(email);
+        SocialEvent event = this.socialEventCRUDService.getById(body.getEventId());
 
-        if (body.assist()) {
+        if (body.isAssist()) {
             event.getGuests().add(user);
         } else {
             event.getGuests().remove(user);
         }
 
         this.socialEventCRUDService.updateEntity(event);
+        response.setInfo(this.getAssistResponse(body.isAssist()));
+        return response;
+    }
 
-        return body;
+    private String equalAssistParameter(boolean assist) {
+        return assist ? "El usuario ya se registro en este evento" : "El usuario no esta registrado en este evento";
+    }
+
+    private String getAssistResponse(boolean assist) {
+        return assist ? "Confirmacion de asistencia exitosa" : "Cancelacion de asistencia exitosa";
     }
 }

@@ -6,10 +6,11 @@ import com.example.demo.services.socialevent.ToggleAssistEventUseCase;
 import com.example.demo.services.socialevent.dto.CreateSocialEventDTO;
 import com.example.demo.services.socialevent.dto.EventQualificationDTO;
 import com.example.demo.services.socialevent.dto.SocialEventInfoDTO;
-import com.example.demo.services.socialevent.dto.UserEventAssistInfo;
+import com.example.demo.services.socialevent.dto.UserEventAssistRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -44,8 +45,9 @@ public class EventsController {
     }
 
     @PatchMapping("/assist")
-    public ResponseEntity<UserEventAssistInfo> toggleAssist(@RequestBody UserEventAssistInfo body) {
-        return ResponseEntity.ok(this.toggleAssistEventUseCase.assists(body));
+    public ResponseEntity<UserEventAssistRequest> toggleAssist(@RequestBody UserEventAssistRequest body) {
+        String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return ResponseEntity.ok(this.toggleAssistEventUseCase.assists(body, email));
     }
 
     @GetMapping("/qualification/{eventId}")
