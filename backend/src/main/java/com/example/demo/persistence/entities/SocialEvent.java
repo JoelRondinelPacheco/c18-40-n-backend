@@ -40,7 +40,7 @@ public class SocialEvent {
     private List<Category> categories;
 
     @OneToMany(mappedBy = "event", fetch = FetchType.LAZY)
-    private List<Qualification> qualifications;
+    private List<Review> reviews;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "organizer_id")

@@ -1,8 +1,10 @@
 package com.example.demo.controller;
 
 import com.example.demo.services.socialevent.SocialEventCRUDService;
+import com.example.demo.services.socialevent.SocialEventService;
 import com.example.demo.services.socialevent.ToggleAssistEventUseCase;
 import com.example.demo.services.socialevent.dto.CreateSocialEventDTO;
+import com.example.demo.services.socialevent.dto.EventQualificationDTO;
 import com.example.demo.services.socialevent.dto.SocialEventInfoDTO;
 import com.example.demo.services.socialevent.dto.ToggleAssistEvent;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +19,13 @@ public class EventsController {
 
     private final SocialEventCRUDService service;
     private final ToggleAssistEventUseCase toggleAssistEventUseCase;
+    private final SocialEventService socialEventService;
 
     @Autowired
-    public EventsController(SocialEventCRUDService service, ToggleAssistEventUseCase toggleAssistEventUseCase) {
+    public EventsController(SocialEventCRUDService service, ToggleAssistEventUseCase toggleAssistEventUseCase, SocialEventService socialEventService) {
         this.service = service;
         this.toggleAssistEventUseCase = toggleAssistEventUseCase;
+        this.socialEventService = socialEventService;
     }
 
     @GetMapping
@@ -42,5 +46,10 @@ public class EventsController {
     @PatchMapping("/assist")
     public ResponseEntity<String> toggleAssist(@RequestBody ToggleAssistEvent body) {
         return ResponseEntity.ok(this.toggleAssistEventUseCase.assists(body));
+    }
+
+    @GetMapping("/qualification/{eventId}")
+    public ResponseEntity<EventQualificationDTO> eventQualification(@PathVariable Long id) {
+        return ResponseEntity.ok(this.socialEventService.getQualification(id));
     }
 }

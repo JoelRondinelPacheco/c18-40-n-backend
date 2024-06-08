@@ -9,13 +9,14 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Qualification {
+public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     //TODO DEFINIR SI ES DE 1 A 5 O OTRO RANGO
-    private Long quantity;
+    @Column(precision = 2, scale = 1)
+    private Long qualification;
     @Column(length = 255)
     private String observations;
 
