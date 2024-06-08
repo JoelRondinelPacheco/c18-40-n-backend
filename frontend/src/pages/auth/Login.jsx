@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import logo from '/logoBlackOrange.png';
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -68,48 +69,51 @@ const Login = () => {
   };
 
   return (
-    <section className="userAuth">
-      <h1>Iniciar Sesión</h1>
-      <form className="form" onSubmit={handleSubmit}>
-        <label className="label" htmlFor="usuario">
-          Usuario
-        </label>
-        {errors.username && <p className="error-message">{errors.username}</p>}
-        <input
-          className="input"
-          type="text"
-          id="usuario"
-          name="usuario"
-          value={username}
-          onChange={handleChange}
-        />
-
-        <label className="label" htmlFor="contraseña">
-          Contraseña
-        </label>
-        {errors.password && <p className="error-message">{errors.password}</p>}
-        <div className="password-container">
+    <div className="parentContainer">
+      <section className="userAuth">
+        <img src={logo} title="Logo de Multi Meet" />
+        <h1>Iniciar Sesión</h1>
+        <form className="form" onSubmit={handleSubmit}>
+          <label className="label" htmlFor="usuario">
+            Usuario
+          </label>
+          {errors.username && <p className="error-message">{errors.username}</p>}
           <input
-            className="input password-input"
-            type={showPassword ? "text" : "password"}
-            id="contraseña"
-            name="contraseña"
-            value={password}
+            className="input"
+            type="text"
+            id="usuario"
+            name="usuario"
+            value={username}
             onChange={handleChange}
           />
-          <FontAwesomeIcon
-            className="password-icon"
-            icon={showPassword ? faEyeSlash : faEye}
-            onClick={toggleShowPassword}
-          />
-        </div>
 
-        <button className="button" type="submit">
-          Ingresar
-        </button>
-      </form>
-      <Link to="/">Regresar al Home</Link>
-    </section>
+          <label className="label" htmlFor="contraseña">
+            Contraseña
+          </label>
+          {errors.password && <p className="error-message">{errors.password}</p>}
+          <div className="password-container">
+            <input
+              className="input password-input"
+              type={showPassword ? "text" : "password"}
+              id="contraseña"
+              name="contraseña"
+              value={password}
+              onChange={handleChange}
+            />
+            <FontAwesomeIcon
+              className="password-icon"
+              icon={showPassword ? faEyeSlash : faEye}
+              onClick={toggleShowPassword}
+            />
+          </div>
+
+          <button className="button" type="submit">
+            Ingresar
+          </button>
+        </form>
+        <Link to="/">Regresar al Home</Link>
+      </section>
+    </div>
   );
 };
 

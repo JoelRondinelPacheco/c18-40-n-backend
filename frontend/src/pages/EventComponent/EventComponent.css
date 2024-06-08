@@ -71,3 +71,18 @@ form {
   max-width: 100%;
   border-radius: 8px;
 }
+
+.resize{
+  width: 100%; /* O ajusta el ancho según tus necesidades */
+  resize: none;
+}
+
+input:focus {
+  border-color: #CA4721;
+  outline: none;
+}
+
+textarea:focus{
+  border-color: #CA4721;
+  outline: none;
+}

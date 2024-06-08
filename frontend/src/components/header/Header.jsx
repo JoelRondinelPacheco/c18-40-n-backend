@@ -30,6 +30,7 @@ const Header = () => {
     setUserRole('');
     navigate('/');
   };
+
   return (
     <div className='container-header'>
       <div className="logo">
@@ -38,20 +39,14 @@ const Header = () => {
         </Link>
       </div>
       <div className='nav-header'>
-        {/* <ul>
-          <li>Inicio</li>
-          <li>Quiénes Somos</li>
-          <li>Calendario</li>
-          <li>Contacto</li>
-        </ul> */}
         <input 
-            type="text" 
-            className="search-input" 
-            placeholder="Buscar evento, organizador, fecha" 
+          type="text" 
+          className="search-input" 
+          placeholder="Buscar evento, organizador, fecha" 
         />
       </div>
       <div className="home-links">
-      {isAuthenticated ? (
+        {isAuthenticated ? (
           <>
             <div className="user-info">
               <span>Hola, {userName}</span>

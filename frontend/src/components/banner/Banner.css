@@ -1,19 +1,79 @@
-.container-banner{
-    position: relative;
+.container-banner {
+    position: relative; /* Necessary for absolute positioning of elements */
     width: 100%;
-    height: 60vh; /* Ocupa toda la altura de la ventana */
-    overflow: hidden; /* Oculta cualquier parte de la imagen que se desborde */
-    margin: auto;
-    /* margin-top: 30px; */
-    /* border-radius: 30px; */
-}
-
-.image-banner{
+    height: 50vh; /* Adjust height as needed */
+    overflow: hidden; /* Prevent image overflow */
+  }
+  
+  .image-banner {
+    width: 100%;
+    height: 100%; /* Fill the container */
+    object-fit: cover; /* Ensure images fill the container proportionally */
+    transition: transform 0.5s ease-in-out; /* Smooth transition between images */
+  }
+  
+  /* Navigation Arrows */
+  .banner-arrows {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%; /* La imagen ocupa todo el ancho del contenedor */
-    height: 50%; /* Establece la altura de la imagen al 50% del contenedor */
-    min-height: 60vh; /* Asegura que la altura de la imagen sea al menos el 50% de la altura de la ventana */
-    object-fit: cover; /* La imagen se ajusta para cubrir todo el contenedor */
-}
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 20px;
+  }
+  
+  .prev-arrow,
+  .next-arrow {
+    color: #FFFFFF;
+    cursor: pointer;
+    }
+  
+  /* Navigation Dots */
+  .banner-dots {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+  }
+  
+  .banner-dot {
+    width: 10px;
+    height: 10px;
+    margin: 0 5px;
+    border-radius: 50%;
+  }
+  
+  .banner-dot.active {
+    background-color: #FFFFFF; /* Adjust the active dot color as needed */
+  }
+  
+  /* Animation */
+  @keyframes slideLeft {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-100%);
+    }
+  }
+  
+  @keyframes slideRight {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(100%);
+    }
+  }
+  
+  .slide-left {
+    animation: slideLeft 0.5s ease-in-out;
+  }
+  
+  .slide-right {
+    animation: slideRight 0.5s ease-in-out;
+  }
+  

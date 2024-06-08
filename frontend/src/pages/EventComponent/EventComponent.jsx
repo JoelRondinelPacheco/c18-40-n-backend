@@ -83,7 +83,7 @@ const EventComponent = () => {
 
         <div className="form-group">
           <label>Descripción</label>
-          <textarea name="description" value={eventData.description} onChange={handleChange} required />
+          <textarea className='resize' name="description" value={eventData.description} onChange={handleChange} required />
         </div>
 
         <div className="form-group">

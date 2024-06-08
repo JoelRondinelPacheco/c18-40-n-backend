@@ -51,13 +51,26 @@
     position: relative;
     border-radius: 30px;
     margin-bottom: 30px;
+    overflow: hidden;
 }
-    
+
+.event-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Cambia la opacidad ajustando el último valor */
+    z-index: 1; /* Asegura que el fondo semi-transparente esté por debajo del contenido */
+}
+
 .event-card img {
     border-radius: 30px;
     width: 100%;
-    height: auto;
+    height: 300px;
     display: block;
+    object-fit: cover;
 }
 
 .event-text {
@@ -65,6 +78,7 @@
     bottom: 20px;
     left: 20px;
     color: white;
+    z-index: 2;
 }
 
 .event-text h3 {
@@ -79,12 +93,13 @@
 
 .info-button {
     margin-top: 10px;
-    padding: 5px 10px;
+    padding: 10px;
     background-color: #CA4721;
     border: none;
     color: white;
     cursor: pointer;
     font-size: 1rem;
+    border-radius: 5px;
 }
 
 .info-button:hover {
