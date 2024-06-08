@@ -43,7 +43,7 @@ public class SocialEvent {
     private List<Review> reviews;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "organizer_id")
+    @JoinColumn(name = "organizer_id", referencedColumnName = "id")
     private User organizer;
 
     @ManyToMany(mappedBy = "attendedEvents")

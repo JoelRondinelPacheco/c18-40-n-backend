@@ -19,10 +19,14 @@ public class Review {
     //TODO DEFINIR SI ES DE 1 A 5 O OTRO RANGO
     @Column(precision = 2, scale = 1)
     private BigDecimal qualification;
-    @Column(length = 255)
-    private String observations;
+    @Column(length = 500)
+    private String comment;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "event_id", referencedColumnName = "id")
     private SocialEvent event;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_data_id", referencedColumnName = "id")
+    private User user;
 }

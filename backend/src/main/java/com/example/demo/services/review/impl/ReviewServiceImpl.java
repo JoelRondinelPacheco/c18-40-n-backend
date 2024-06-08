@@ -4,6 +4,7 @@ import com.example.demo.persistence.entities.Review;
 import com.example.demo.persistence.repository.ReviewRepository;
 import com.example.demo.services.review.ReviewService;
 import com.example.demo.services.review.dto.ReviewInfoDTO;
+import com.example.demo.services.review.dto.ReviewInfoQueryDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,9 +21,7 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public Page<ReviewInfoDTO> getReviews(Long id, Pageable pageable) {
-        Page<Review> reviews = this.reviewRepository.findByEvent_Id(id, pageable);
-        //todo llamar a los comentarios desde el usuario?
-        return null;
+    public Page<ReviewInfoQueryDTO> getReviews(Long id, Pageable pageable) {
+        return this.reviewRepository.findByEvent_Id(id, pageable);
     }
 }

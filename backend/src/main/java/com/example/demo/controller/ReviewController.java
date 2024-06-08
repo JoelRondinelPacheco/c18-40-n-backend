@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.services.review.ReviewService;
 import com.example.demo.services.review.dto.ReviewInfoDTO;
+import com.example.demo.services.review.dto.ReviewInfoQueryDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -25,7 +26,7 @@ public class ReviewController {
     }
 
     @GetMapping("/event/{eventId}")
-    public ResponseEntity<Page<ReviewInfoDTO>> getEventReviews(@PathVariable Long id, Pageable pageable) {
+    public ResponseEntity<Page<ReviewInfoQueryDTO>> getEventReviews(@PathVariable Long id, Pageable pageable) {
         return ResponseEntity.ok(this.reviewService.getReviews(id, pageable));
     }
 }

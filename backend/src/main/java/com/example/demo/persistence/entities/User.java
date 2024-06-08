@@ -35,4 +35,7 @@ public class User {
     )
     private List<SocialEvent> attendedEvents;
 
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<Review> reviews;
+
 }
