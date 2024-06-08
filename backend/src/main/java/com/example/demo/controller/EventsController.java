@@ -49,7 +49,7 @@ public class EventsController {
     }
 
     @GetMapping("/qualification/{eventId}")
-    public ResponseEntity<EventQualificationDTO> eventQualification(@PathVariable Long id) {
-        return ResponseEntity.ok(this.socialEventService.getQualification(id));
+    public ResponseEntity<EventQualificationDTO> eventQualification(@PathVariable Long eventId) {
+        return ResponseEntity.ok(this.socialEventService.getQualification(eventId));
     }
 }
