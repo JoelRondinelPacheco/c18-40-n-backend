@@ -1,5 +1,6 @@
 package com.example.demo.services.user.impl;
 
+import com.example.demo.exceptions.EntityNotFoundException;
 import com.example.demo.persistence.entities.User;
 import com.example.demo.persistence.repository.UserRepository;
 import com.example.demo.services.DtoMapper;
@@ -32,9 +33,14 @@ public class UserCRUDServiceImpl implements UserCRUDService {
     }
 
     @Override
-    public UserInfoDTO getPersonByEmail(String email) {
+    public UserInfoDTO getUserDTOByEmail(String email) {
 
         return null;
+    }
+
+    @Override
+    public User getUserByEmail(String email) {
+        return this.userRepository.findByEmail(email).orElseThrow(() -> new EntityNotFoundException("User not found"));
     }
 
     @Override

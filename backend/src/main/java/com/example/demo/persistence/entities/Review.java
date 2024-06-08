@@ -2,6 +2,7 @@ package com.example.demo.persistence.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,6 +12,7 @@ import java.math.BigDecimal;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,6 +29,6 @@ public class Review {
     private SocialEvent event;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_data_id", referencedColumnName = "id")
+    @JoinColumn(name = "user_data_email", referencedColumnName = "email")
     private User user;
 }

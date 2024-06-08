@@ -11,6 +11,7 @@ import com.example.demo.services.auth.dto.LoginRequest;
 import com.example.demo.services.auth.dto.LoginResponse;
 import com.example.demo.services.auth.dto.RegisterRequest;
 import com.example.demo.services.user.RegisterUserUseCase;
+import com.example.demo.services.user.UserUtils;
 import com.example.demo.services.user.dto.CreateUserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -34,12 +35,13 @@ public class AuthServiceImpl implements AuthService {
     private final BCryptPasswordEncoder passwordEncoder;
     private final UserCredentialsService userCredentialsService;
     private final RoleService roleService;
+    private final UserUtils userUtils;
 
     @Value("${security.default.role}")
     private String DEFAULT_ROLE;
 
     @Autowired
-    public AuthServiceImpl(CustomUserDetailsService userDetailsService, AuthenticationManager authenticationManager, JwtTokenServiceImpl jwtTokenService, RegisterUserUseCase registerUserUseCase, BCryptPasswordEncoder passwordEncoder, UserCredentialsService userCredentialsService, RoleService roleService) {
+    public AuthServiceImpl(CustomUserDetailsService userDetailsService, AuthenticationManager authenticationManager, JwtTokenServiceImpl jwtTokenService, RegisterUserUseCase registerUserUseCase, BCryptPasswordEncoder passwordEncoder, UserCredentialsService userCredentialsService, RoleService roleService, UserUtils userUtils) {
         this.userDetailsService = userDetailsService;
         this.authenticationManager = authenticationManager;
         this.jwtTokenService = jwtTokenService;
@@ -47,6 +49,7 @@ public class AuthServiceImpl implements AuthService {
         this.passwordEncoder = passwordEncoder;
         this.userCredentialsService = userCredentialsService;
         this.roleService = roleService;
+        this.userUtils = userUtils;
     }
 
     @Override
@@ -62,7 +65,7 @@ public class AuthServiceImpl implements AuthService {
                 this.generateExtraClaims(userCredentials)
                 );
 
-        return new LoginResponse(jwt, userCredentials.getRole().getName(), this.getLoginUsername(userCredentials.getUser()));
+        return new LoginResponse(jwt, userCredentials.getRole().getName(), this.userUtils.getUsername(userCredentials.getUser()));
     }
 
     @Override
@@ -100,16 +103,5 @@ public class AuthServiceImpl implements AuthService {
 
     private boolean validatePassword(String password, String repeatedPassword) {
         return password.equals(repeatedPassword);
-    }
-
-    private String getLoginUsername(User user) {
-
-        if (!user.getName().isBlank()) {
-            return user.getName().concat(
-                    user.getLastname()
-            );
-        }
-
-        return user.getUsername();
     }
 }

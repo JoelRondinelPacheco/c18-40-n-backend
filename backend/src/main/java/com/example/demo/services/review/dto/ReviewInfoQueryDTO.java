@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 public interface ReviewInfoQueryDTO {
     Long getId();
     BigDecimal getQualification();
-    String getObservations();
+    String getComment();
     @Value(("#{@ReviewUserInfo.getUsername(user)}"))
     String getUsername();
 }

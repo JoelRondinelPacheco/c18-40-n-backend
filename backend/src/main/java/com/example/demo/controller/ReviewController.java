@@ -1,16 +1,13 @@
 package com.example.demo.controller;
 
 import com.example.demo.services.review.ReviewService;
-import com.example.demo.services.review.dto.ReviewInfoDTO;
+import com.example.demo.services.review.dto.AddReviewRequest;
 import com.example.demo.services.review.dto.ReviewInfoQueryDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,5 +25,10 @@ public class ReviewController {
     @GetMapping("/event/{eventId}")
     public ResponseEntity<Page<ReviewInfoQueryDTO>> getEventReviews(@PathVariable Long eventId, Pageable pageable) {
         return ResponseEntity.ok(this.reviewService.getReviews(eventId, pageable));
+    }
+
+    @PostMapping("/{eventId}")
+    public ResponseEntity<ReviewInfoQueryDTO> addReview(@PathVariable Long eventId, @RequestBody AddReviewRequest body) {
+        return ResponseEntity.ok(this.reviewService.addReview(eventId, body));
     }
 }

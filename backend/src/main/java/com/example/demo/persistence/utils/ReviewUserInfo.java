@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ReviewUserInfo {
-
     String getUsername(User user) {
         if (!user.getName().isBlank()) {
             return user.getName().concat(
