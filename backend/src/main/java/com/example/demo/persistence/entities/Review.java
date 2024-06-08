@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -16,7 +18,7 @@ public class Review {
 
     //TODO DEFINIR SI ES DE 1 A 5 O OTRO RANGO
     @Column(precision = 2, scale = 1)
-    private Long qualification;
+    private BigDecimal qualification;
     @Column(length = 255)
     private String observations;
 
