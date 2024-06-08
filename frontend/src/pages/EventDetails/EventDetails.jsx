@@ -60,6 +60,8 @@ const EventDetail = () => {
         <p>{event.date}</p>
         <h4>Hora:</h4>
         <p>{event.time}</p>
+        <h4>Organizador(a):</h4>
+        <p>{event.organizer}</p>
       </div>
       <button className="attend-button" onClick={handleAttend}>Asistir</button>
       <button className="back-button" onClick={() => navigate(-1)}>Regresar</button>

@@ -9,15 +9,15 @@ const Footer = () => {
           <img src='./logoWhiteOrange.png' alt="Multimeet Logo" className="footer-logo" />
         </div>
         <div className="footer-section">
-          <h4>MULTIMEET</h4>
+          {/* <h4>MULTIMEET</h4> */}
           <ul>
-            <li>Inicio</li>
-            <Link to='/about-us'>Quienes Somos</Link>
-            <li>Calendario</li>
-            <li>Contacto</li>
+            {/* <li>Inicio</li> */}
+            <li><Link to='/about-us'>Quiénes Somos</Link></li>
+            {/* <li>Calendario</li> */}
+            <li><Link to='/blog'>Blog</Link></li>
           </ul>
         </div>
-        <div className="footer-section">
+        {/* <div className="footer-section">
           <h4>Clientes y soporte</h4>
           <ul>
             <li>Teléfono</li>
@@ -25,14 +25,14 @@ const Footer = () => {
             <li>Soporte técnico</li>
             <li>Hablar con un asesor</li>
           </ul>
-        </div>
-        <div className="footer-section">
+        </div> */}
+        {/* <div className="footer-section">
           <h4>Contacto</h4>
           <ul>
             <li>Teléfono</li>
             <li>Mail</li>
           </ul>
-        </div>
+        </div> */}
       </div>
       <div className="footer-bottom">
         <p>Multimeet @ 2024 todos los derechos reservados</p>
