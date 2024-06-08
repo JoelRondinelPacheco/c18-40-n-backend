@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -71,6 +72,8 @@ public class SocialEventCRUDServiceImpl implements SocialEventCRUDService {
 
     @Override
     public Page<SocialEventInfoDTO> getPage(Pageable pageable) {
+        //SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        // todo agregar si el usario asiste a cada evento
         return this.socialEventRepository.findAll(pageable).map(this.mapper::entityToDTO);
     }
 

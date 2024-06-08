@@ -21,6 +21,7 @@ public class SocialEvent {
     private String name;
     private Long invitedGuest;
     private String address;
+    @Temporal(TemporalType.TIMESTAMP)
     private Date programmedDate;
     private String contactInfo;
 
