@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./Auth.css";
 import { Link } from "react-router-dom";
-// import logo from "/Users/user/Desktop/c18-40-n-java-react/frontend/src/assets/logoMultiMeet.png";
+import logo from '/logoBlackOrange.png';
 
 const Register = () => {
   const [username, setUsername] = useState("");
@@ -85,73 +85,75 @@ const Register = () => {
   };
 
   return (
-    <section className="userAuth">
-      {/* <img src={logo} alt="Logo de Multi Meet" /> */}
-      <h1>Iniciar Registro</h1>
-      <form className="form" onSubmit={handleSubmit}>
+    <div className="parentContainer">
+      <section className="userAuth">
+        <img src={logo} title="Logo de Multi Meet" />
+        <h1>Iniciar Registro</h1>
+        <form className="form" onSubmit={handleSubmit}>
 
-        <label className="label" htmlFor="usuario">
-          Usuario
-        </label>
-        {errors.username && <p className="error-message">{errors.username}</p>}
-        <input
-          className="input"
-          type="text"
-          id="usuario"
-          name="username"
-          value={username}
-          onChange={handleOnchange}
-        />
+          <label className="label" htmlFor="usuario">
+            Usuario
+          </label>
+          {errors.username && <p className="error-message">{errors.username}</p>}
+          <input
+            className="input"
+            type="text"
+            id="usuario"
+            name="username"
+            value={username}
+            onChange={handleOnchange}
+          />
 
-        <label className="label" htmlFor="email">
-          Correo Electrónico
-        </label>
-        {errors.email && <p className="error-message">{errors.email}</p>}
-        <input
-          className="input"
-          placeholder="nombredeusuario@dominio.com"
-          type="email"
-          id="email"
-          name="email"
-          value={email}
-          onChange={handleOnchange}
-        />
+          <label className="label" htmlFor="email">
+            Correo Electrónico
+          </label>
+          {errors.email && <p className="error-message">{errors.email}</p>}
+          <input
+            className="input"
+            placeholder="nombredeusuario@dominio.com"
+            type="email"
+            id="email"
+            name="email"
+            value={email}
+            onChange={handleOnchange}
+          />
 
-        <label className="label" htmlFor="contraseña">
-          Contraseña
-        </label>
-        {errors.password && <p className="error-message">{errors.password}</p>}
-        <input
-          className="input"
-          type="password"
-          id="contraseña"
-          name="password"
-          value={password}
-          onChange={handleOnchange}
-        />
+          <label className="label" htmlFor="contraseña">
+            Contraseña
+          </label>
+          {errors.password && <p className="error-message">{errors.password}</p>}
+          <input
+            className="input"
+            type="password"
+            id="contraseña"
+            name="password"
+            value={password}
+            onChange={handleOnchange}
+          />
 
-        <label className="label" htmlFor="confirmarContraseña">
-          Por favor confirmar contraseña
-        </label>
-        {errors.confirmPassword && (
-          <p className="error-message">{errors.confirmPassword}</p>
-        )}
-        <input
-          className="input"
-          type="password"
-          id="confirmarContraseña"
-          name="confirmPassword"
-          value={confirmPassword}
-          onChange={handleOnchange}
-        />
+          <label className="label" htmlFor="confirmarContraseña">
+            Por favor confirmar contraseña
+          </label>
+          {errors.confirmPassword && (
+            <p className="error-message">{errors.confirmPassword}</p>
+          )}
+          <input
+            className="input"
+            type="password"
+            id="confirmarContraseña"
+            name="confirmPassword"
+            value={confirmPassword}
+            onChange={handleOnchange}
+          />
 
 
-        <button className="button" type="submit">
-          Registrarse
-        </button>
-      </form>
-      <Link to="/">Regresar al Home</Link>
-    </section>
+          <button className="button" type="submit">
+            Registrarse
+          </button>
+        </form>
+        <Link to="/">Regresar al Home</Link>
+      </section>
+    </div>
   );
 };
 

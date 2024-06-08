@@ -50,6 +50,7 @@ const ItTalks = () => {
               <p>{event.location}</p>
               <p>{event.date}</p>
               <p>{event.time}</p>
+              <p>{event.organizer}</p>
               <button className="info-button" onClick={() => handleShowModal(event)}>Vista previa</button>
             </div>
           </div>

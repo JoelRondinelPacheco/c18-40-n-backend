@@ -2,8 +2,7 @@
     background-color: #252827;
     color: #fff;
     padding: 20px 0;
-    font-family: Arial, sans-serif;
-  }
+  }  
   
   .footer-content {
     display: flex;
@@ -19,7 +18,7 @@
   }
   
   .footer-logo {
-    width: 100px; /* Ajusta el tamaño del logo según sea necesario */
+    width: 50px; /* Ajusta el tamaño del logo según sea necesario */
   }
   
   .footer-section h4 {
@@ -29,10 +28,21 @@
   .footer-section ul {
     list-style: none;
     padding: 0;
+    display: flex;
+    justify-content: flex-end;
   }
   
   .footer-section ul li {
-    margin-bottom: 5px;
+    margin: 0 30px;
+    margin-top: 30px;
+  }
+
+  .footer-section ul li a{
+    text-decoration: none;
+    color: #fff;
+  }
+  .footer-section ul li a:hover{
+    color: #CA4721;
   }
   
   .footer-bottom {
