@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
@@ -18,4 +19,6 @@ public class SocialEventInfoDTO extends SocialEventBaseDTO {
     private Long confirmedGuests;
     private List<CategoryInfoDTO> categories;
     private UserInfoDTO organizer;
+    private BigDecimal totalQualification;
+    private boolean userAssists;
 }

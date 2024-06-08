@@ -1,7 +1,8 @@
 package com.example.demo.services.socialevent;
 
-import com.example.demo.services.socialevent.dto.ToggleAssistEvent;
+import com.example.demo.services.socialevent.dto.UserEventAssistRequest;
+import com.example.demo.services.socialevent.dto.UserEventAssistResponse;
 
 public interface ToggleAssistEventUseCase {
-    String assists(ToggleAssistEvent body);
+    UserEventAssistResponse assists(UserEventAssistRequest body, String email);
 }

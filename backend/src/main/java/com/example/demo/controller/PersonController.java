@@ -33,7 +33,7 @@ public class PersonController {
         return ResponseEntity.ok(persons);
     }
 
-    @GetMapping("/id/{test}")
+    @GetMapping("/eventId/{test}")
     public ResponseEntity<String> testEndpoint(@PathVariable String test) {
         return ResponseEntity.ok(test);
     }
