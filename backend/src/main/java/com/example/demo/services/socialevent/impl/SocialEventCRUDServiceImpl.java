@@ -74,6 +74,11 @@ public class SocialEventCRUDServiceImpl implements SocialEventCRUDService {
     }
 
     @Override
+    public SocialEvent updateEntity(SocialEvent socialEvent) {
+        return null;
+    }
+
+    @Override
     public Page<SocialEventInfoDTO> getPage(Pageable pageable) {
         Object p = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 

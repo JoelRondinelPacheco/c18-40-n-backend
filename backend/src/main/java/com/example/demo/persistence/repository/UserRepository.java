@@ -13,7 +13,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query("SELECT true FROM SocialEvent e "
             + "JOIN e.guests a "
-            + "WHERE a.email = :userEmail AND e.id = :eventId")
+            + "WHERE a.email = :userEmail AND e.eventId = :eventId")
     public boolean isUserAttendingEvent(String userEmail, Long eventId);
 
 }

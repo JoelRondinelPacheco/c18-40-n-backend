@@ -6,7 +6,7 @@ import com.example.demo.services.socialevent.ToggleAssistEventUseCase;
 import com.example.demo.services.socialevent.dto.CreateSocialEventDTO;
 import com.example.demo.services.socialevent.dto.EventQualificationDTO;
 import com.example.demo.services.socialevent.dto.SocialEventInfoDTO;
-import com.example.demo.services.socialevent.dto.ToggleAssistEvent;
+import com.example.demo.services.socialevent.dto.UserEventAssistInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -44,7 +44,7 @@ public class EventsController {
     }
 
     @PatchMapping("/assist")
-    public ResponseEntity<String> toggleAssist(@RequestBody ToggleAssistEvent body) {
+    public ResponseEntity<UserEventAssistInfo> toggleAssist(@RequestBody UserEventAssistInfo body) {
         return ResponseEntity.ok(this.toggleAssistEventUseCase.assists(body));
     }
 
