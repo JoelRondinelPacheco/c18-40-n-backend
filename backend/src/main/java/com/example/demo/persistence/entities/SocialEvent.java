@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 
@@ -22,6 +21,7 @@ public class SocialEvent {
     private String name;
     private Long invitedGuest;
     private String address;
+    @Temporal(TemporalType.TIMESTAMP)
     private Date programmedDate;
     private String contactInfo;
 
@@ -40,12 +40,12 @@ public class SocialEvent {
     private List<Category> categories;
 
     @OneToMany(mappedBy = "event", fetch = FetchType.LAZY)
-    private List<Qualification> qualifications;
+    private List<Review> reviews;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "organizer_id")
-    private Person organizer;
+    @JoinColumn(name = "organizer_id", referencedColumnName = "id")
+    private User organizer;
 
     @ManyToMany(mappedBy = "attendedEvents")
-    private List<Person> guests;
+    private List<User> guests;
 }

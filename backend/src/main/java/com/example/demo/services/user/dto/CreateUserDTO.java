@@ -1,14 +1,17 @@
-package com.example.demo.services.category.dto;
+package com.example.demo.services.user.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class CategoryInfoDTO extends CreateCategoryDTO {
-    private Long id;
+@SuperBuilder
+public class CreateUserDTO extends UserBaseDTO {
+    private String password;
+
 }

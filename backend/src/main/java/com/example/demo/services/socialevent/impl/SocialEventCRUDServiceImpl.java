@@ -2,7 +2,7 @@ package com.example.demo.services.socialevent.impl;
 
 import com.example.demo.exceptions.EntityNotFoundException;
 import com.example.demo.persistence.entities.Category;
-import com.example.demo.persistence.entities.Person;
+import com.example.demo.persistence.entities.User;
 import com.example.demo.persistence.entities.SocialEvent;
 import com.example.demo.persistence.repository.CategoryRepository;
 import com.example.demo.persistence.repository.SocialEventRepository;
@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -64,7 +65,6 @@ public class SocialEventCRUDServiceImpl implements SocialEventCRUDService {
         socialEvent.setPublished(update.isPublished());
         socialEvent.setMaxGuests(update.getMaxGuests());
         socialEvent.setCategories(categories);
-        // TODO CAMBIAR ORGANIZADOR?
 
         SocialEvent savedSocialEvent = this.socialEventRepository.save(socialEvent);
         return this.mapper.entityToDTO(savedSocialEvent);
@@ -72,6 +72,8 @@ public class SocialEventCRUDServiceImpl implements SocialEventCRUDService {
 
     @Override
     public Page<SocialEventInfoDTO> getPage(Pageable pageable) {
+        //SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        // todo agregar si el usario asiste a cada evento
         return this.socialEventRepository.findAll(pageable).map(this.mapper::entityToDTO);
     }
 
@@ -94,7 +96,7 @@ public class SocialEventCRUDServiceImpl implements SocialEventCRUDService {
 
     private SocialEvent socialEventFromDTO(CreateSocialEventDTO dto) {
 
-        Person person = this.userRepository.findByEmail(dto.getOrganizerEmail()).orElseThrow();
+        User user = this.userRepository.findByEmail(dto.getOrganizerEmail()).orElseThrow();
         List<Category> categories = this.categoryRepository.findAllById(dto.getCategoriesId());
 
         SocialEvent socialEvent = new SocialEvent();
@@ -107,7 +109,7 @@ public class SocialEventCRUDServiceImpl implements SocialEventCRUDService {
         socialEvent.setPrice(dto.getPrice());
         socialEvent.setPublished(dto.isPublished());
         socialEvent.setCategories(categories);
-        socialEvent.setOrganizer(person);
+        socialEvent.setOrganizer(user);
 
         return socialEvent;
     }
