@@ -26,7 +26,7 @@ public class ReviewController {
     }
 
     @GetMapping("/event/{eventId}")
-    public ResponseEntity<Page<ReviewInfoQueryDTO>> getEventReviews(@PathVariable Long id, Pageable pageable) {
-        return ResponseEntity.ok(this.reviewService.getReviews(id, pageable));
+    public ResponseEntity<Page<ReviewInfoQueryDTO>> getEventReviews(@PathVariable Long eventId, Pageable pageable) {
+        return ResponseEntity.ok(this.reviewService.getReviews(eventId, pageable));
     }
 }
