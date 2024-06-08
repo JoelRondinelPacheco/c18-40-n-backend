@@ -46,6 +46,6 @@ public class SocialEvent {
     @JoinColumn(name = "organizer_id", referencedColumnName = "id")
     private User organizer;
 
-    @ManyToMany(mappedBy = "attendedEvents")
+    @ManyToMany(mappedBy = "attendedEvents", cascade = CascadeType.ALL)
     private List<User> guests;
 }

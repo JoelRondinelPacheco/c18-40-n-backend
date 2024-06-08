@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -75,7 +76,7 @@ public class SocialEventCRUDServiceImpl implements SocialEventCRUDService {
 
     @Override
     public SocialEvent updateEntity(SocialEvent socialEvent) {
-        return null;
+        return this.socialEventRepository.save(socialEvent);
     }
 
     @Override
@@ -88,9 +89,9 @@ public class SocialEventCRUDServiceImpl implements SocialEventCRUDService {
 
     private SocialEventInfoDTO socialEventInfo(SocialEvent socialEvent, String email) {
         boolean userAssists = false;
-        //false por defecto si es anonymousUser
-        if (!email.equals("anonymousUser")) {
-            userAssists  = this.userRepository.isUserAttendingEvent(email, socialEvent.getId());
+        Optional<User> userOptional = this.userRepository.findByEmail(email);
+        if (userOptional.isPresent()) {
+            userAssists  = this.userRepository.isUserAttendingEvent(userOptional.get().getId(), socialEvent.getId()) > 0 ;
         }
 
         BigDecimal eventTotalQualification = this.socialEventService.getQualification(socialEvent.getId()).qualification();

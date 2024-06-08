@@ -11,9 +11,10 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByEmail(String email);
 
-    @Query("SELECT true FROM SocialEvent e "
+    /*@Query("SELECT e.* FROM SocialEvent e "
             + "JOIN e.guests a "
-            + "WHERE a.email = :userEmail AND e.eventId = :eventId")
-    public boolean isUserAttendingEvent(String userEmail, Long eventId);
+            + "WHERE a.email = :userEmail AND e.id = :eventId")*/
+    @Query(value = "SELECT COUNT(*) FROM user_data_event_relation WHERE user_data_id = :userId AND event_id = :eventId", nativeQuery = true)
+    public Long isUserAttendingEvent(Long userId, Long eventId);
 
 }

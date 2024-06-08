@@ -12,6 +12,8 @@ import com.example.demo.services.user.UserCRUDService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class ToggleAssistEventUseCaseImpl implements ToggleAssistEventUseCase {
 
@@ -31,28 +33,37 @@ public class ToggleAssistEventUseCaseImpl implements ToggleAssistEventUseCase {
     @Override
     public UserEventAssistResponse assists(UserEventAssistRequest body, String email) {
 
-        boolean userAssists = this.userRepository.isUserAttendingEvent(email, body.getEventId());
-
         UserEventAssistResponse response = UserEventAssistResponse.builder()
                 .eventId(body.getEventId())
                 .assist(body.isAssist())
                 .build();
+
+        Optional<User> userOptional = this.userRepository.findByEmail(email);
+
+        if (userOptional.isEmpty()) {
+            response.setInfo("Usuario necesita estar logeado");
+            return response;
+        }
+
+        User user = userOptional.get();
+        Long revent = this.userRepository.isUserAttendingEvent(user.getId(), body.getEventId());
+
+        boolean userAssists  = revent > 0 ;
 
         if (userAssists == body.isAssist()) {
             response.setInfo(this.equalAssistParameter(body.isAssist()));
             return response;
         }
 
-        User user = this.userCRUDService.getUserByEmail(email);
         SocialEvent event = this.socialEventCRUDService.getById(body.getEventId());
 
         if (body.isAssist()) {
-            event.getGuests().add(user);
+            user.getAttendedEvents().add(event);
         } else {
-            event.getGuests().remove(user);
+            user.getAttendedEvents().remove(event);
         }
 
-        this.socialEventCRUDService.updateEntity(event);
+        this.userRepository.save(user);
         response.setInfo(this.getAssistResponse(body.isAssist()));
         return response;
     }
