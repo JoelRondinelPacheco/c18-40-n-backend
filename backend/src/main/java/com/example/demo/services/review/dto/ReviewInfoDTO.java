@@ -31,4 +31,5 @@ public class ReviewInfoDTO implements ReviewInfoQueryDTO {
     public String getUsername() {
         return this.username;
     }
+
 }

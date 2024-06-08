@@ -1,12 +1,12 @@
-package com.example.demo.persistence.utils;
+package com.example.demo.services.review.dto;
 
 import com.example.demo.persistence.entities.User;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ReviewUserInfo {
-    String getUsername(User user) {
-        if (!user.getName().isBlank()) {
+    public String getUsername(User user) {
+        if (user.getName() != null) {
             return user.getName().concat(
                     user.getLastname()
             );

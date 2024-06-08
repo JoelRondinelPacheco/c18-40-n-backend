@@ -29,6 +29,11 @@ public class ReviewController {
 
     @PostMapping("/{eventId}")
     public ResponseEntity<ReviewInfoQueryDTO> addReview(@PathVariable Long eventId, @RequestBody AddReviewRequest body) {
+        /*
+            TODO
+                QUE EL USUARIO SOLO PUEDA COMENTAR A EVENTOS QUE ASISTIO (QUE SE HABILITEN COMENTARIOS CUANDO TERMINO EL EVENTO??)
+                QUE EL USUARIO SOLO PUEDA HACER UN COMENTARIO
+         */
         return ResponseEntity.ok(this.reviewService.addReview(eventId, body));
     }
 }
