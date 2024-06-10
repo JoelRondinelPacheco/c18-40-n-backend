@@ -11,12 +11,22 @@ import java.util.Date;
 @AllArgsConstructor
 @Data
 public class SocialEventBaseDTO {
+    //si
     private String name;
-    private String address;
-    private Date programatedDate;
-    private String contactInfo;
+    private Date startDate;
     private String details;
     private BigDecimal price;
-    private boolean published;
     private Long maxGuests;
+
+    //nuevo
+    private Date finishDate;
+
+    //lugar
+    private String placeName;
+    private String address;
+    private String city;
+
+    private String contactInfo;
+    private boolean published;
+
 }

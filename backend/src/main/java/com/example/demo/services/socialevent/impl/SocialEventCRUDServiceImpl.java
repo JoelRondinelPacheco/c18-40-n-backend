@@ -62,7 +62,7 @@ public class SocialEventCRUDServiceImpl implements SocialEventCRUDService {
         SocialEvent socialEvent = this.getById(update.getId());
         socialEvent.setName(update.getName());
         socialEvent.setAddress(update.getAddress());
-        socialEvent.setProgrammedDate(update.getProgramatedDate());
+        socialEvent.setStartDate(update.getStartDate());
         socialEvent.setContactInfo(update.getContactInfo());
         socialEvent.setDetails(update.getDetails());
         socialEvent.setPrice(update.getPrice());
@@ -127,8 +127,14 @@ public class SocialEventCRUDServiceImpl implements SocialEventCRUDService {
         SocialEvent socialEvent = new SocialEvent();
         socialEvent.setName(dto.getName());
         socialEvent.setMaxGuests(dto.getMaxGuests());
+
         socialEvent.setAddress(dto.getAddress());
-        socialEvent.setProgrammedDate(dto.getProgramatedDate());
+        socialEvent.setCity(dto.getCity());
+        socialEvent.setPlaceName(dto.getPlaceName());
+
+        socialEvent.setStartDate(dto.getStartDate());
+        socialEvent.setFinishDate(dto.getFinishDate());
+
         socialEvent.setContactInfo(dto.getContactInfo());
         socialEvent.setDetails(dto.getDetails());
         socialEvent.setPrice(dto.getPrice());

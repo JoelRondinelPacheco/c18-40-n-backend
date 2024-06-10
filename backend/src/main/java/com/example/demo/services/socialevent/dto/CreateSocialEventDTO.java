@@ -15,7 +15,9 @@ import java.util.List;
 @AllArgsConstructor
 @Data
 public class CreateSocialEventDTO extends SocialEventBaseDTO {
-    //TODO COORDINAR DATOS QUE SE VAN A RECIBIR DESDE EL FRONT
+    //si
     private List<Long> categoriesId;
+
+
     private String organizerEmail;
 }
