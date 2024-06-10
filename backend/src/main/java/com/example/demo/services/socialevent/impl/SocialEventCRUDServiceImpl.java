@@ -1,6 +1,6 @@
 package com.example.demo.services.socialevent.impl;
 
-import com.example.demo.exceptions.EntityNotFoundException;
+import com.example.demo.infra.exceptions.EntityNotFoundException;
 import com.example.demo.persistence.entities.Category;
 import com.example.demo.persistence.entities.Image;
 import com.example.demo.persistence.entities.User;

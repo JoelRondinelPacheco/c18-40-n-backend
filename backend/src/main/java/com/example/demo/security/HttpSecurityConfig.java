@@ -36,6 +36,7 @@ public class HttpSecurityConfig {
                 .authorizeHttpRequests(authRequest -> authRequest
                         .requestMatchers(HttpMethod.POST,"/auth/login", "/auth/register").permitAll()
                         .requestMatchers(HttpMethod.GET, "/event").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/user/id/SingleUser").permitAll()
                         .requestMatchers(HttpMethod.GET, "/event/*").permitAll()
                         .requestMatchers(HttpMethod.GET, "/filter", "/search").permitAll()
                         .requestMatchers(HttpMethod.PATCH, "/event/assist").authenticated()
