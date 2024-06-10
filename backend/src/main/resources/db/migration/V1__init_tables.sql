@@ -3,7 +3,12 @@ create table event_category_relation (category_id bigint not null, event_id bigi
 create table user_data (id bigserial not null, phone_number bigint, address varchar(255), email varchar(255) unique not null, lastname varchar(255), name varchar(255), username varchar(255), primary key (id));
 create table user_data_event_relation (event_id bigint not null, user_data_id bigint not null);
 create table review (event_id bigint not null, user_data_email varchar(255) not null, id bigserial not null, qualification numeric(2,1), comment varchar(500), primary key (id));
-create table social_event (price numeric(38,2), published boolean not null, id bigserial not null, invited_guest bigint, max_guests bigint, organizer_id bigint, confirmed_guests bigint, programmed_date timestamp(6), details varchar(2500), address varchar(255), contact_info varchar(255), name varchar(255), primary key (id));
+create table image (id bigserial, mime varchar(255), name varchar(255), content BYTEA, primary key (id));
+create table social_event (price numeric(38,2), published boolean not null, id bigserial not null,
+                            invited_guest bigint, max_guests bigint, organizer_id bigint, confirmed_guests bigint,
+                            start_date timestamp(6), finish_date timestamp(6), details varchar(2500), address varchar(255), contact_info varchar(255),
+                            name varchar(255), city varchar(255), place_name varchar(255),
+                            image_id bigint not null,primary key (id));
 create table user_credentials(id bigserial not null, user_email varchar(255), password varchar(500) not null, account_non_expired boolean, account_non_locked boolean, credentials_non_expired boolean, enabled boolean, role_id bigserial not null, primary key (id));
 create table role (id bigserial not null, name varchar(100) unique not null, primary key (id));
 create table permissions (id bigserial not null, name varchar(255) unique not null, primary key (id));
@@ -18,6 +23,7 @@ alter table if exists review add constraint FKpd1l87ikelg9ity38y76mn7px foreign 
 alter table if exists review add constraint fk_review_user foreign key (user_data_email) references user_data(email);
 
 alter table if exists social_event add constraint FKe2kpqx37pv164e2vj2hvliasi foreign key (organizer_id) references user_data;
+alter table if exists social_event add constraint fk_social_event_image foreign key (image_id) references image;
 
 alter table if exists user_credentials add constraint fk_user_credentials_user_data foreign key (user_email) references user_data(email);
 
