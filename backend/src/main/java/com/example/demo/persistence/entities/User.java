@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+
 @Entity(name = "user_data")
 @Data
 @NoArgsConstructor
@@ -21,6 +22,7 @@ public class User {
     private String username;
     private String address;
     private Long phoneNumber;
+
     @Column(unique = true, nullable = false)
     private String email;
 

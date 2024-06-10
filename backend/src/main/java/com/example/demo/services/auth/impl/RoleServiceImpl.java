@@ -1,6 +1,6 @@
 package com.example.demo.services.auth.impl;
 
-import com.example.demo.exceptions.EntityNotFoundException;
+import com.example.demo.infra.exceptions.EntityNotFoundException;
 import com.example.demo.persistence.entities.Role;
 import com.example.demo.persistence.repository.RoleRepository;
 import com.example.demo.services.auth.RoleService;
