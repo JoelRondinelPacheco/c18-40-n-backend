@@ -54,4 +54,8 @@ public class SocialEvent {
 
     @ManyToMany(mappedBy = "attendedEvents", cascade = CascadeType.ALL)
     private List<User> guests;
+
+    @OneToOne
+    @JoinColumn(name = "image_id", referencedColumnName = "id")
+    private Image image;
 }
