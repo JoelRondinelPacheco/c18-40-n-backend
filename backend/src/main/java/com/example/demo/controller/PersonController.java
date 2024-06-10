@@ -1,9 +1,11 @@
 package com.example.demo.controller;
-import com.example.demo.services.person.PersonCRUDService;
-import com.example.demo.services.person.PersonRepository;
-import com.example.demo.services.person.dto.CreatePersonDTO;
-import com.example.demo.services.person.dto.PersonInfoDTO;
 import jakarta.transaction.Transactional;
+
+
+import com.example.demo.services.user.UserCRUDService;
+import com.example.demo.services.user.dto.CreateUserDTO;
+import com.example.demo.services.user.dto.UserInfoDTO;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,45 +17,49 @@ import org.springframework.web.bind.annotation.*;
 public class PersonController {
 
 
-    private final PersonCRUDService personService;
+
+    private final UserCRUDService personService;
 
     @Autowired
-    public PersonController(PersonCRUDService personService, PersonRepository personRepository) {
+    public PersonController(UserCRUDService personService) {
         this.personService = personService;
     }
 
 
     @PostMapping
     @Transactional
-    public ResponseEntity<PersonInfoDTO> createUser(@RequestBody CreatePersonDTO body) {
-        PersonInfoDTO person = personService.createPerson(body);
-        return ResponseEntity.ok(person);
-    }
+    public ResponseEntity<UserInfoDTO> createUser(@RequestBody CreateUserDTO body) {
 
-    @GetMapping
-    @Transactional
-    public ResponseEntity<Page<PersonInfoDTO>> getUsers(Pageable pageable) {
-        Page<PersonInfoDTO> persons = personService.getPersons(pageable);
-        return ResponseEntity.ok(persons);
+        UserInfoDTO person = personService.createPerson(body);
+
+        return ResponseEntity.ok(person);
     }
 
 
     @PutMapping
     @Transactional
-    public ResponseEntity<PersonInfoDTO> updateUser(@RequestBody PersonInfoDTO personInfoDTO){
+    public ResponseEntity<UserInfoDTO> updateUser(@RequestBody UserInfoDTO userInfoDTO){
 
-        PersonInfoDTO person = personService.updatePerson(personInfoDTO);
+        UserInfoDTO person = personService.updatePerson(userInfoDTO);
         return  ResponseEntity.ok(person);
     }
 
     @DeleteMapping
     @Transactional
-    public ResponseEntity<PersonInfoDTO> deleteUser(@RequestBody PersonInfoDTO personInfoDTO){
-        //TODO
-        return ResponseEntity.ok(personInfoDTO);
+    public ResponseEntity<UserInfoDTO> deleteUser(@RequestBody UserInfoDTO userInfoDTO){
+        UserInfoDTO person = personService.getUserById(userInfoDTO.getId());
+
+        return ResponseEntity.ok(person);
     }
 
     @GetMapping("/id/{test}")
+    public ResponseEntity<Page<UserInfoDTO>> getUsers(Pageable pageable) {
+        Page<UserInfoDTO> persons = this.personService.getPersons(pageable);
+
+        return ResponseEntity.ok(persons);
+    }
+
+    @GetMapping("/eventId/{test}")
     public ResponseEntity<String> testEndpoint(@PathVariable String test) {
         return ResponseEntity.ok(test);
     }

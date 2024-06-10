@@ -9,6 +9,8 @@ import org.springframework.data.domain.Pageable;
 public interface SocialEventCRUDService {
     SocialEventInfoDTO create(CreateSocialEventDTO info);
     SocialEventInfoDTO update(SocialEventInfoDTO update);
+
+    SocialEvent updateEntity(SocialEvent socialEvent);
     Page<SocialEventInfoDTO> getPage(Pageable pageable);
 
     SocialEventInfoDTO getDTOById(Long id);
