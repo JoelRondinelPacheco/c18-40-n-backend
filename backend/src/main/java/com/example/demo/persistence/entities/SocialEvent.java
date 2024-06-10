@@ -20,9 +20,15 @@ public class SocialEvent {
     private Long id;
     private String name;
     private Long invitedGuest;
+    //nuevo
     private String address;
+    private String city;
+    private String placeName;
+    //nuevo
     @Temporal(TemporalType.TIMESTAMP)
-    private Date programmedDate;
+    private Date startDate;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date finishDate;
     private String contactInfo;
 
     @Column(length = 2500)

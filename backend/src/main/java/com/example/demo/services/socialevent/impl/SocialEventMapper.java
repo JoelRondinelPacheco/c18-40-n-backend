@@ -34,7 +34,7 @@ public class SocialEventMapper implements DtoMapper<SocialEventInfoDTO, SocialEv
         socialEventInfoDTO.setId(socialEvent.getId());
         socialEventInfoDTO.setName(socialEvent.getName());
         socialEventInfoDTO.setAddress(socialEvent.getAddress());
-        socialEventInfoDTO.setProgramatedDate(socialEvent.getProgrammedDate());
+        socialEventInfoDTO.setStartDate(socialEvent.getStartDate());
         socialEventInfoDTO.setContactInfo(socialEvent.getContactInfo());
         socialEventInfoDTO.setDetails(socialEvent.getDetails());
         socialEventInfoDTO.setPrice(socialEvent.getPrice());
