@@ -7,24 +7,22 @@ services:
       - 8080:8080
     environment:
       NC_PORT: 8080
-      DB_NC_URL: jdbc:postgresql://multimeet_db:5430/multimeet
+      DB_NC_URL: jdbc:postgresql://multimeet_db:5432/multimeet
       DB_NC_USERNAME: nc18-40
       DB_NC_PASSWORD: nc18-40pwd
+      NC_URL_FRONTEND: http://localhost:3000
     depends_on:
       - multimeet_db
-
   multimeet_frontend:
     container_name: multimeet_frontend
     image: multimeet_fronted:1.0.0
     build: ./frontend
     ports:
-      - 5174:3000
+      - 3000:3000
     environment:
       VITE_API_BASE_URL: http://multimeet_backend:8080/api/v1
     depends_on:
       - multimeet_backend
-
-
   multimeet_db:
     image: postgres:14.12
     container_name: multimeet_db
@@ -36,4 +34,4 @@ services:
     volumes:
       - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
-      - '5430:5430'
+      - 5432:5432

@@ -48,6 +48,8 @@ const Login = () => {
     setErrors(validationError); // Actualiza el estado de los errores
     // Si no hay errores de validación, maneja el envío del formulario (por ejemplo, llamada a la API)
     if (Object.keys(validationError).length === 0) {
+      let data =  login(username, password)
+      console.log(data)
       // Simulación de la lógica de login
       const token = 'your-auth-token';
       const user = { name: 'John', role: 'organizer' }; // o 'user'
@@ -67,6 +69,33 @@ const Login = () => {
   const toggleShowPassword = () => {
     setShowPassword((prevState) => !prevState); // Invierte el estado actual
   };
+
+  async function login(username, password) {
+    const url = 'http://localhost:8080/api/v1/auth/login';
+    const payload = {
+      email: username,
+      password: password
+    };
+  
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload)
+      });
+
+  
+      const data = await response.json();
+      console.log(data)
+      return data;
+    } catch (error) {
+      console.error('Error during login:', error);
+      throw error;
+    }
+  }
+  
 
   return (
     <div className="parentContainer">
