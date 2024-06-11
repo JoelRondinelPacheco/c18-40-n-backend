@@ -4,10 +4,10 @@ import "./UserProfile.css";
 import { Link } from "react-router-dom";
 
 const initialProfileData = {
-  name: "Jhon",
+  name: "Agustina Díaz",
   age: 25,
   location: "Buenos Aires, Argentina",
-  interests: ["Arte", "Teatro", "Danza", "Tecnología"],
+  interests: ["Arte", "Fotografía", "Diseño", "Danza"],
 };
 
 const UserProfile = () => {
@@ -26,28 +26,41 @@ const UserProfile = () => {
       ) : (
         <div className="profile-view">
           <div className="profile-header">
-            <div className="avatar">Jh</div>
+            <div className="avatar">AD</div>
             <div className="profile-info">
               <h2>{profileData.name}</h2>
-              <p>Edad: {profileData.age}</p>
-              <p>Ubicación: {profileData.location}</p>
-              <p>Intereses: {profileData.interests.join(", ")}</p>
+              <p>25 años</p>
+              <p>{profileData.location}</p>
+              <div className="interests">
+                {profileData.interests.map((interest) => (
+                  <span key={interest}>{interest}</span>
+                ))}
+              </div>
             </div>
+            <span className="edit-icon" onClick={() => setIsEditing(true)}>✏️</span>
           </div>
-          <button className="edit-button" onClick={() => setIsEditing(true)}>
-            Editar Perfil
-          </button>
-          <Link to="/">Regresar al Home</Link>
         </div>
       )}
       <div className="events-section">
-        <h2>Próximos eventos</h2>
+        <div className="events-tabs">
+          <button className="active-tab">Próximos eventos</button>
+          <button>Historial de eventos</button>
+        </div>
         <div className="event">
           <img src="/danzaClasica.jpeg" alt="Event" />
           <div>
             <h3>Danza clásica</h3>
-            <p>15 de junio, 20:30 hs</p>
-            <p>Teatro NUM</p>
+            <p>15 de Junio, 20:30 hs</p>
+            <p>Teatro NUM, Juan Ramirez de Velasco 419, CABA</p>
+          </div>
+          <div className="qr-code">QR</div>
+        </div>
+        <div className="event">
+          <img src="/danzaClasica.jpeg" alt="Event" />
+          <div>
+            <h3>Danza clásica</h3>
+            <p>15 de Junio, 20:30 hs</p>
+            <p>Teatro NUM, Juan Ramirez de Velasco 419, CABA</p>
           </div>
           <div className="qr-code">QR</div>
         </div>

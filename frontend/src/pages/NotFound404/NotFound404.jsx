@@ -4,8 +4,8 @@ import './NotFound404.css'
 const NotFound404 = () => {
   return (
     <div className='not-found'>
-        <h1>Página no disponible</h1>
-        <p>Lo sentimos, el enlace que has seguido no está disponible.</p>
+        <h1>Oops!</h1>
+        <p>El evento que estás buscando no se encuentra disponible</p>
         <Link to="/">Volver al inicio</Link>
     </div>
   )

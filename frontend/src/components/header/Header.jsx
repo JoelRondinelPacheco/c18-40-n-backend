@@ -1,17 +1,15 @@
 import { useEffect } from 'react';
-import './Header.css'
-import { Link, useNavigate } from 'react-router-dom'
+import './Header.css';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
 const Header = () => {
-
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userName, setUserName] = useState('');
   const [userRole, setUserRole] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Simulación de la lógica de autenticación y rol
     const token = localStorage.getItem('authToken');
     const user = JSON.parse(localStorage.getItem('user'));
 
@@ -53,13 +51,14 @@ const Header = () => {
               <button onClick={handleLogout} className="logout-button">Cerrar Sesión</button>
             </div>
             {userRole === 'organizer' && (
-              <Link to='/create-event'>
-                <div className="create-event">Crear Evento</div>
-                <div>
-                  <Link to ="/user-profile">Mi perfil</Link>
-                </div>
-              </Link>
-              
+              <div className="organizer-links">
+                <Link to='/create-event'>
+                  <div className="create-event">Crear Evento</div>
+                </Link>
+                <Link to='/user-profile'>
+                  <div className="user-profiles">Mi perfil</div>
+                </Link>
+              </div>
             )}
           </>
         ) : (
@@ -74,7 +73,7 @@ const Header = () => {
         )}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;
