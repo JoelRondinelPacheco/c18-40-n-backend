@@ -21,11 +21,12 @@
   padding: 10px 20px;
   font-size: 1rem;
   background-color: #CA4721;
-  color: white;
+  color: #FFFFFF;
   text-decoration: none;
   border-radius: 5px;
 }
 
 .not-found a:hover {
   background-color: #ff3700;
+  color: #FFFFFF;
 }

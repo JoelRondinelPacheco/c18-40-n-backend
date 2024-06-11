@@ -1,4 +1,6 @@
 .user-profile {
+  display: flex;
+  flex-direction: column;
   padding: 20px;
   max-width: 800px;
   margin: 0 auto;
@@ -8,62 +10,91 @@
 }
 
 .profile-view {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 20px;
+  width: 100%;
 }
 
 .profile-header {
   display: flex;
   align-items: center;
-  width: 100%;
   margin-bottom: 20px;
 }
 
 .avatar {
-  width: 80px;
-  height: 80px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
   background-color: #ff4500;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2rem;
+  font-size: 3rem;
   color: white;
   margin-right: 20px;
 }
 
 .profile-info {
-  display: flex;
-  flex-direction: column;
+  flex-grow: 1;
 }
 
-.edit-button,
-.save-button {
-  padding: 10px 20px;
+.profile-info h2 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.profile-info p {
+  margin: 5px 0;
+  font-size: 1.2rem;
+}
+
+.edit-icon {
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #888;
+  margin-left: auto;
+}
+
+.profile-details {
+  margin-top: 20px;
+}
+
+.profile-details h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.interests {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.interests span {
   background-color: #ff4500;
   color: white;
-  border: none;
+  padding: 5px 10px;
   border-radius: 5px;
-  font-size: 1rem;
-  cursor: pointer;
-  margin-top: 10px;
 }
 
-.edit-button:hover,
-.save-button:hover {
-  background-color: #e63900;
+.events-tabs {
+  display: flex;
+  margin-top: 20px;
+}
+
+.events-tabs button {
+  flex-grow: 1;
+  padding: 10px;
+  border: none;
+  background-color: #f0f0f0;
+  cursor: pointer;
+}
+
+.events-tabs .active-tab {
+  background-color: #ff4500;
+  color: white;
 }
 
 .events-section {
   margin-top: 20px;
-}
-
-.events-section h2 {
-  margin-bottom: 20px;
-  font-size: 1.5rem;
-  color: #333;
 }
 
 .event {
@@ -77,8 +108,8 @@
 }
 
 .event img {
-  width: 80px;
-  height: 80px;
+  width: 100px;
+  height: 100px;
   border-radius: 5px;
   margin-right: 20px;
 }
@@ -89,13 +120,13 @@
 
 .event h3 {
   margin: 0;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   color: #333;
 }
 
 .event p {
   margin: 5px 0;
-  font-size: 1rem;
+  font-size: 1.2rem;
   color: #666;
 }
 
