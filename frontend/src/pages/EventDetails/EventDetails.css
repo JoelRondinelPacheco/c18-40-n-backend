@@ -1,0 +1,101 @@
+.event-detail-container {
+  width: 90%;
+  margin: 0 auto;
+  margin-bottom: 50px;
+  padding-top: 20px;
+}
+
+.event-detail-container h1 {
+  margin: 20px 0;
+  font-size: 2.5rem;
+  color: #333;
+}
+
+.event-detail-banner {
+  position: relative;
+  width: 100%;
+  border-radius: 30px;
+  margin-bottom: 20px;
+}
+
+.event-detail-banner img {
+  width: 100%;
+  height: 50vh;
+  object-fit: cover;
+  display: block;
+  border-radius: 30px;
+}
+
+.event-detail-text {
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.event-detail-text h2 {
+  margin: 0 0 10px;
+  font-size: 2rem;
+  color: #CA4721;
+}
+
+.event-detail-text p {
+  margin: 10px 0;
+  font-size: 1.2rem;
+  color: #555;
+}
+
+.event-detail-info {
+  margin: 20px 0;
+  padding: 10px 20px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.event-detail-info h4 {
+  margin: 10px 0;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.event-detail-info p {
+  margin: 5px 0;
+  font-size: 1.1rem;
+  color: #777;
+}
+
+.attend-button {
+  background-color: #CA4721;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-top: 20px;
+  border-radius: 8px;
+}
+
+.attend-button:hover {
+  background-color: #ff3700;
+}
+
+.back-button {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #CA4721;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+  text-align: center;
+  border-radius: 8px;
+  text-decoration: none;
+}
+
+.back-button:hover {
+  background-color: #ff3700;
+}
