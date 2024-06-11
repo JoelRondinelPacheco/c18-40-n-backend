@@ -1,6 +1,7 @@
 package com.example.demo.services.user.impl;
 
-import com.example.demo.exceptions.EntityNotFoundException;
+import com.example.demo.infra.exceptions.EntityNotFoundException;
+import com.example.demo.infra.exceptions.UserNotFound;
 import com.example.demo.persistence.entities.User;
 import com.example.demo.persistence.repository.UserRepository;
 import com.example.demo.services.DtoMapper;
@@ -12,6 +13,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class UserCRUDServiceImpl implements UserCRUDService {
@@ -34,6 +37,13 @@ public class UserCRUDServiceImpl implements UserCRUDService {
 
     @Override
     public UserInfoDTO getUserDTOByEmail(String email) {
+
+        return null;
+    }
+
+    @Override
+    public Optional<User> getUserById(Long id) {
+        //TODO add implementation
 
         return null;
     }

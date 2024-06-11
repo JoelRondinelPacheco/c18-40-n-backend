@@ -1,13 +1,15 @@
 package com.example.demo.services.socialevent.impl;
 
-import com.example.demo.exceptions.EntityNotFoundException;
+import com.example.demo.infra.exceptions.EntityNotFoundException;
 import com.example.demo.persistence.entities.Category;
+import com.example.demo.persistence.entities.Image;
 import com.example.demo.persistence.entities.User;
 import com.example.demo.persistence.entities.SocialEvent;
 import com.example.demo.persistence.repository.CategoryRepository;
 import com.example.demo.persistence.repository.SocialEventRepository;
 import com.example.demo.persistence.repository.UserRepository;
 import com.example.demo.services.DtoMapper;
+import com.example.demo.services.image.ImageService;
 import com.example.demo.services.socialevent.SocialEventCRUDService;
 import com.example.demo.services.socialevent.SocialEventService;
 import com.example.demo.services.socialevent.dto.CreateSocialEventDTO;
@@ -18,6 +20,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -33,19 +36,24 @@ public class SocialEventCRUDServiceImpl implements SocialEventCRUDService {
     private final SocialEventRepository socialEventRepository;
     private final UserRepository userRepository;
     private final SocialEventService socialEventService;
+    private final ImageService imageService;
 
     @Autowired
-    public SocialEventCRUDServiceImpl(DtoMapper<SocialEventInfoDTO, SocialEvent> mapper, CategoryRepository categoryRepository, SocialEventRepository socialEventRepository, UserRepository userRepository, SocialEventService socialEventService) {
+    public SocialEventCRUDServiceImpl(DtoMapper<SocialEventInfoDTO, SocialEvent> mapper, CategoryRepository categoryRepository, SocialEventRepository socialEventRepository, UserRepository userRepository, SocialEventService socialEventService, ImageService imageService) {
         this.mapper = mapper;
         this.categoryRepository = categoryRepository;
         this.socialEventRepository = socialEventRepository;
         this.userRepository = userRepository;
         this.socialEventService = socialEventService;
+        this.imageService = imageService;
     }
 
     @Override
+    @Transactional
     public SocialEventInfoDTO create(CreateSocialEventDTO info) {
+        Image image = this.imageService.save(info.getImage());
         SocialEvent socialEvent = this.socialEventFromDTO(info);
+        socialEvent.setImage(image);
         SocialEvent savedSocialEvent = this.socialEventRepository.save(socialEvent);
         return this.mapper.entityToDTO(savedSocialEvent);
     }
@@ -60,14 +68,14 @@ public class SocialEventCRUDServiceImpl implements SocialEventCRUDService {
         );
 
         SocialEvent socialEvent = this.getById(update.getId());
-        socialEvent.setName(update.getName());
+        socialEvent.setName(update.getEventName());
         socialEvent.setAddress(update.getAddress());
-        socialEvent.setProgrammedDate(update.getProgramatedDate());
+        socialEvent.setStartDate(update.getStartDate());
         socialEvent.setContactInfo(update.getContactInfo());
         socialEvent.setDetails(update.getDetails());
         socialEvent.setPrice(update.getPrice());
         socialEvent.setPublished(update.isPublished());
-        socialEvent.setMaxGuests(update.getMaxGuests());
+        socialEvent.setMaxGuests(update.getAudienceCapacity());
         socialEvent.setCategories(categories);
 
         SocialEvent savedSocialEvent = this.socialEventRepository.save(socialEvent);
@@ -99,6 +107,12 @@ public class SocialEventCRUDServiceImpl implements SocialEventCRUDService {
         s.setTotalQualification(eventTotalQualification);
         s.setUserAssists(userAssists);
 
+        if (socialEvent.getImage() != null) {
+            s.setImageId(socialEvent.getImage().getId());
+        } else {
+            s.setImageId(null);
+        }
+
         return s;
     }
 
@@ -125,10 +139,16 @@ public class SocialEventCRUDServiceImpl implements SocialEventCRUDService {
         List<Category> categories = this.categoryRepository.findAllById(dto.getCategoriesId());
 
         SocialEvent socialEvent = new SocialEvent();
-        socialEvent.setName(dto.getName());
-        socialEvent.setMaxGuests(dto.getMaxGuests());
+        socialEvent.setName(dto.getEventName());
+        socialEvent.setMaxGuests(dto.getAudienceCapacity());
+
         socialEvent.setAddress(dto.getAddress());
-        socialEvent.setProgrammedDate(dto.getProgramatedDate());
+        socialEvent.setCity(dto.getCity());
+        socialEvent.setPlaceName(dto.getPlaceName());
+
+        socialEvent.setStartDate(dto.getStartDate());
+        socialEvent.setFinishDate(dto.getFinishDate());
+
         socialEvent.setContactInfo(dto.getContactInfo());
         socialEvent.setDetails(dto.getDetails());
         socialEvent.setPrice(dto.getPrice());

@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -14,8 +16,10 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@SuperBuilder
 public class CreateSocialEventDTO extends SocialEventBaseDTO {
-    //TODO COORDINAR DATOS QUE SE VAN A RECIBIR DESDE EL FRONT
+    //si
     private List<Long> categoriesId;
     private String organizerEmail;
+    private MultipartFile image;
 }
