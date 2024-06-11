@@ -107,6 +107,12 @@ public class SocialEventCRUDServiceImpl implements SocialEventCRUDService {
         s.setTotalQualification(eventTotalQualification);
         s.setUserAssists(userAssists);
 
+        if (socialEvent.getImage() != null) {
+            s.setImageId(socialEvent.getImage().getId());
+        } else {
+            s.setImageId(null);
+        }
+
         return s;
     }
 

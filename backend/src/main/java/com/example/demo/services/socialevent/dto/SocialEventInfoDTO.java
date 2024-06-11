@@ -21,4 +21,5 @@ public class SocialEventInfoDTO extends SocialEventBaseDTO {
     private UserInfoDTO organizer;
     private BigDecimal totalQualification;
     private boolean userAssists;
+    private Long imageId;
 }
