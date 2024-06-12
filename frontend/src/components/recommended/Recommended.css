@@ -1,0 +1,92 @@
+.container-recommended {
+    width: 90%;
+    margin: 0 auto;
+    margin-bottom: 50px;
+}
+
+.container-recommended h1{
+    margin: 20px 0;
+    font-size: 2rem;
+}
+
+.main-banner {
+    position: relative;
+    width: 100%;
+    border-radius: 30px;
+    margin-bottom: 20px;
+}
+
+.main-banner img {
+    width: 100%;
+    height: 50vh;
+    display: block;
+    border-radius: 30px;
+}
+
+.banner-text {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: white;
+}
+
+.banner-text h2 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+.banner-text p {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.event-list {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.event-card {
+    width: 32%;
+    position: relative;
+    border-radius: 30px;
+    margin-bottom: 30px;
+}
+    
+.event-card img {
+    border-radius: 30px;
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.event-text {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: white;
+}
+
+.event-text h3 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.event-text p {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.info-button {
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: #CA4721;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.info-button:hover {
+    background-color: #ff3700;
+}
