@@ -21,8 +21,8 @@ import java.util.Arrays;
 public class SecurityBeans {
 
     private final CustomUserDetailsService userDetailsService;
-    @Value("${security.default.url-fronted}")
-    private String URL_FRONTED;
+    @Value("${security.default.url-frontend}")
+    private String URL_FRONTEND;
     @Autowired
     public SecurityBeans(CustomUserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
@@ -52,7 +52,7 @@ public class SecurityBeans {
     CorsConfigurationSource corsConfigurationSource() {
 
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:5175", "localhost:5175", URL_FRONTED));
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:5175", "localhost:5175", URL_FRONTEND));
         configuration.setAllowedMethods(Arrays.asList("*"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
         configuration.setAllowCredentials(true);
