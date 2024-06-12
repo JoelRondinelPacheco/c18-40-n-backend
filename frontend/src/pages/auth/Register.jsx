@@ -1,7 +1,6 @@
 import { useState } from "react";
-import "./Auth.css";
-import { Link } from "react-router-dom";
 import logo from '/logoBlackOrange.png';
+import "./Auth.css";
 
 const Register = () => {
   const [username, setUsername] = useState("");
@@ -9,8 +8,9 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState({});
+  const [successMessage, setSuccessMessage] = useState("");
 
-  const handleOnchange = (event) => {
+  const handleOnChange = (event) => {
     const { name, value } = event.target;
     setErrors((prevState) => ({
       ...prevState,
@@ -28,16 +28,16 @@ const Register = () => {
     }
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     let validationErrors = {};
 
+    // Validations
     if (username.trim().length === 0) {
       validationErrors.username = "El campo usuario es obligatorio";
     } else if (username.length < 3) {
-      validationErrors.username =
-        "El nombre de usuario debe tener al menos 3 caracteres";
+      validationErrors.username = "El nombre de usuario debe tener al menos 3 caracteres";
     }
 
     if (email.trim().length === 0) {
@@ -45,52 +45,67 @@ const Register = () => {
     }
 
     if (password.trim().length < 8) {
-      validationErrors.password =
-        "La contraseña debe tener al menos 8 caracteres";
+      validationErrors.password = "La contraseña debe tener al menos 8 caracteres";
     } else if (!/[a-z]+/.test(password)) {
-      validationErrors.password =
-        "La contraseña debe contener al menos una letra minúscula";
+      validationErrors.password = "La contraseña debe contener al menos una letra minúscula";
     } else if (!/[A-Z]+/.test(password)) {
-      validationErrors.password =
-        "La contraseña debe contener al menos una letra mayúscula";
+      validationErrors.password = "La contraseña debe contener al menos una letra mayúscula";
     } else if (!/\d+/.test(password)) {
-      validationErrors.password =
-        "La contraseña debe contener al menos un numero";
+      validationErrors.password = "La contraseña debe contener al menos un número";
     } else if (!/[!@#\$%\^&\*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(password)) {
-      validationErrors.password =
-        "La contraseña debe contener al menos un carácter especial(#,@,&,$,%)";
+      validationErrors.password = "La contraseña debe contener al menos un carácter especial(#,@,&,$,%)";
     }
 
-    if (!confirmPassword.trim().length === 0) {
-      validationErrors.confirmPassword =
-        "La confirmación de contraseña es obligatorio";
+    if (confirmPassword.trim().length === 0) {
+      validationErrors.confirmPassword = "La confirmación de contraseña es obligatoria";
     } else if (password !== confirmPassword) {
       validationErrors.confirmPassword = "Las contraseñas no coinciden";
     }
+
     setErrors(validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {
-      //Registrar usuario en el Backend
-      console.log(
-        "Usuario registrado satisfactoriamente",
-        username,
-        email,
-        password
-      ); // para la prueba
-      setUsername("");
-      setEmail("");
-      setPassword("");
-      setConfirmPassword("");
+      try {
+        const response = await fetch("http://localhost:8080/api/v1/auth/register", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            username: username,
+            email: email,
+            password: password,
+            repeatedPassword: confirmPassword,
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error("Error en el registro");
+        }
+
+        const data = await response.json();
+        console.log("Usuario registrado satisfactoriamente", data);
+        setSuccessMessage("Usuario registrado satisfactoriamente");
+
+        // Limpiar los campos después del registro exitoso
+        setUsername("");
+        setEmail("");
+        setPassword("");
+        setConfirmPassword("");
+      } catch (error) {
+        console.error("Error al registrar el usuario:", error);
+        setErrors({ apiError: "Error al registrar el usuario. Inténtelo de nuevo más tarde." });
+      }
     }
   };
 
   return (
     <div className="parentContainer">
       <section className="userAuth">
-        <img src={logo} title="Logo de Multi Meet" />
+        <img src={logo} alt="Logo de Multi Meet" />
         <h1>Iniciar Registro</h1>
+        {successMessage && <p className="success-message">{successMessage}</p>}
         <form className="form" onSubmit={handleSubmit}>
-
           <label className="label" htmlFor="usuario">
             Usuario
           </label>
@@ -101,7 +116,7 @@ const Register = () => {
             id="usuario"
             name="username"
             value={username}
-            onChange={handleOnchange}
+            onChange={handleOnChange}
           />
 
           <label className="label" htmlFor="email">
@@ -115,7 +130,7 @@ const Register = () => {
             id="email"
             name="email"
             value={email}
-            onChange={handleOnchange}
+            onChange={handleOnChange}
           />
 
           <label className="label" htmlFor="contraseña">
@@ -128,7 +143,7 @@ const Register = () => {
             id="contraseña"
             name="password"
             value={password}
-            onChange={handleOnchange}
+            onChange={handleOnChange}
           />
 
           <label className="label" htmlFor="confirmarContraseña">
@@ -143,15 +158,15 @@ const Register = () => {
             id="confirmarContraseña"
             name="confirmPassword"
             value={confirmPassword}
-            onChange={handleOnchange}
+            onChange={handleOnChange}
           />
-
 
           <button className="button" type="submit">
             Registrarse
           </button>
         </form>
-        <Link to="/">Regresar al Home</Link>
+        <p>{errors.apiError}</p>
+        <p>¿Ya tienes una cuenta? <a href="/">Iniciar sesión</a></p>
       </section>
     </div>
   );
