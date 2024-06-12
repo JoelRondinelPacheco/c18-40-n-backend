@@ -79,6 +79,7 @@ const Register = () => {
           }),
         });
 
+
         if (!response.ok) {
           throw new Error("Error en el registro");
         }
